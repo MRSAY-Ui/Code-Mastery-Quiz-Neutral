@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Code Mastery Quiz — Neutral</title>
+<meta name="description" content="20-question web dev quiz (HTML/CSS/JS/Logic). Score B or higher to unlock the reveal." />
+<style>
+  :root{
+    --bg:#0b0b0d;
+    --card:#141418;
+    --muted:#b7bcc4;
+    --text:#e8e9ed;
+    --accent:#7cf7e6;      /* cyan */
+    --accent-2:#b493ff;    /* purple */
+    --ok:#70ffa0;
+    --err:#ff5f72;
+    --border:#242432;
+    --focus:#62d6ff;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Inter,Apple Color Emoji,Segoe UI Emoji;
+    background:radial-gradient(1200px 800px at 70% -10%,#11111a 20%, transparent 60%) , var(--bg);
+    color:var(--text);
+    letter-spacing:.2px;
+  }
+  a{color:var(--accent)}
+  .wrap{
+    max-width:960px;
+    margin:0 auto;
+    padding:24px;
+  }
+  .card{
+    background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.0));
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:28px;
+    box-shadow:0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.02);
+  }
+  h1,h2,h3{margin:0 0 12px}
+  h1{font-size:clamp(26px,3.6vw,40px);letter-spacing:.5px}
+  h2{font-size:clamp(20px,3vw,28px)}
+  p{color:var(--muted);line-height:1.6;margin:0 0 14px}
+  .muted{color:var(--muted)}
+  .row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .btn{
+    appearance:none;border:0;cursor:pointer;
+    padding:12px 18px;border-radius:14px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#0b0b0d;font-weight:700;
+    box-shadow:0 10px 24px rgba(124,247,230,.2);
+    transition:transform .08s ease, box-shadow .2s ease, filter .2s ease;
+  }
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+  .btn:active{transform:translateY(0)}
+  .btn.secondary{
+    background:transparent;color:var(--text);border:1px solid var(--border);
+    box-shadow:none;font-weight:600;
+  }
+  .btn.ghost{background:transparent;color:var(--muted);border:0}
+  .btn[disabled]{opacity:.5;cursor:not-allowed}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:8px 12px;border-radius:999px;border:1px solid var(--border);color:var(--muted);
+    background:rgba(255,255,255,.02)
+  }
+  .stack{display:flex;flex-direction:column;gap:16px}
+  .choices{display:grid;gap:12px;margin-top:12px}
+  .choice{
+    padding:14px;border-radius:14px;border:1px solid var(--border);
+    background:rgba(255,255,255,.02);display:flex;gap:12px;align-items:flex-start;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .choice:hover{border-color:#2e2e3c;background:rgba(255,255,255,.03)}
+  .choice input{margin-top:3px}
+  .bar{
+    display:flex;justify-content:space-between;align-items:center;gap:10px;margin:10px 0 18px;
+    font-size:14px;color:var(--muted)
+  }
+  .bar .progress{
+    position:relative;flex:1;height:10px;border-radius:999px;background:#101018;border:1px solid var(--border);overflow:hidden;
+  }
+  .bar .progress > span{
+    position:absolute;left:0;top:0;bottom:0;width:0%;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .35s ease;
+  }
+  .feedback{margin-top:8px;font-weight:700}
+  .feedback.ok{color:var(--ok)}
+  .feedback.err{color:var(--err)}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,#26263a,transparent);margin:18px 0}
+  .center{text-align:center}
+  .reveal{
+    background:linear-gradient(180deg,#101018,#0b0b0d);
+    border:1px solid #2b2b3e;border-radius:20px;padding:24px;
+    box-shadow:0 10px 50px rgba(146,128,255,.15), inset 0 0 60px rgba(124,247,230,.03);
+    text-align:center
+  }
+  code, .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .kbd{
+    padding:2px 6px;border:1px solid var(--border);border-bottom-width:2px;border-radius:6px;background:#0f0f16;color:var(--text)
+  }
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  /* focus */
+  :focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:10px}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- HOME / LANDING -->
+    <section id="screen-home" class="card stack" role="region" aria-label="Home">
+      <div>
+        <h1>Hello, Junior! I’m ●</h1>
+        <p class="muted">Prove your skill in code. Only those who score <strong>B</strong> or higher will see my true identity.</p>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <button class="btn" id="btn-play" aria-describedby="home-help">Play</button>
+        <button class="btn secondary" id="btn-rules">How it works</button>
+        <span id="home-help" class="pill">20 questions · 5 points each · Total 100</span>
+      </div>
+      <details>
+        <summary class="muted">What’s inside?</summary>
+        <ul class="muted">
+          <li>Topics: HTML, CSS, JavaScript, and general coding logic</li>
+          <li>20 multiple-choice questions (4 options)</li>
+          <li>Score: 5 points per correct answer (no negative marking)</li>
+          <li>Grading: A (90–100), B (80–89), C (70–79), D (60–69), F (&lt;60)</li>
+          <li>Identity reveal only if you reach <strong>B</strong> or higher</li>
+        </ul>
+      </details>
+    </section>
+
+    <!-- RULES MODAL (simple card toggle) -->
+    <section id="screen-rules" class="card stack" role="dialog" aria-modal="true" aria-labelledby="rules-title" hidden>
+      <h2 id="rules-title">Game Rules & Scoring</h2>
+      <p class="muted">This is a focused, academic-style quiz covering core web development concepts.</p>
+      <ul class="muted">
+        <li><strong>Questions:</strong> 20 MCQs · 4 options each</li>
+        <li><strong>Scoring:</strong> 5 points per correct answer · Total 100</li>
+        <li><strong>Grading:</strong> A (90–100), B (80–89), C (70–79), D (60–69), F (&lt;60)</li>
+        <li><strong>Reveal:</strong> Identity is shown only if you achieve <strong>B</strong> or higher.</li>
+      </ul>
+      <div class="row">
+        <button class="btn" id="btn-start">Start the Challenge</button>
+        <button class="btn secondary" id="btn-close-rules">Close</button>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="screen-quiz" class="card stack" role="region" aria-label="Quiz" hidden>
+      <div class="bar">
+        <span class="pill" id="pill-qno">Question 1 of 20</span>
+        <div class="progress" aria-label="Progress"><span id="progress-fill" style="width:0%"></span></div>
+        <span class="pill" id="pill-score">Score 0 / 100</span>
+      </div>
+
+      <div id="qtext" class="h3" style="font-size:18px;font-weight:700">Question text</div>
+      <form id="qform" class="choices" aria-labelledby="qtext">
+        <!-- options injected -->
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+
+      <div class="row">
+        <button class="btn" id="btn-submit" disabled>Submit</button>
+        <button class="btn secondary" id="btn-next" hidden>Next</button>
+        <button class="btn ghost" id="btn-exit">Back to Home</button>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section id="screen-result" class="card stack center" role="region" aria-label="Result" hidden>
+      <h2>Well played!</h2>
+      <p class="muted" id="result-stats">You completed the quiz.</p>
+      <p><strong>Your grade:</strong> <span id="grade-letter" class="mono"></span></p>
+      <div id="reveal-block" class="reveal" hidden>
+        <p class="muted">You’re strong. You’ve earned this.</p>
+        <p style="margin:8px 0 14px;font-weight:700">คุณเก่งมาก และแล้วก็แนะนำตัวของฉัน</p>
+        <pre class="mono" style="text-align:left;display:inline-block;max-width:100%;white-space:pre-wrap">
+My name is NAME SAYSAMONE
+CLASS: 2CW2
+NAMBER :1111101011110110110011110111000
+        </pre>
+      </div>
+      <div id="retry-block" hidden>
+        <p class="muted">Close… Level up and try again to unmask me.</p>
+      </div>
+      <div class="row" style="justify-content:center">
+        <button class="btn" id="btn-restart">Restart</button>
+      </div>
+    </section>
+  </div>
+
+<script>
+/* ===========================
+   DATA: 20 code-only questions
+   Each: { q, options[4], answerIndex }
+   5 points per correct answer -> total 100
+=========================== */
+const QUESTIONS = [
+  { q: "Which tag defines the main page heading?", options: ["<h6>", "<title>", "<h1>", "<head>"], a: 2 },
+  { q: "Which attribute sets the image source?", options: ["href", "src", "alt", "data"], a: 1 },
+  { q: "Which CSS property changes text color?", options: ["font-style", "color", "text-decoration", "fill"], a: 1 },
+  { q: "For performance, where do scripts usually go in HTML?", options: ["<head>", "Top of <body>", "End of <body>", "Before </html>"], a: 2 },
+  { q: "Select only <p> elements that are descendants of .card:", options: [".card + p", ".card > p", ".card p", "p.card"], a: 2 },
+  { q: "Which is NOT a valid CSS unit?", options: ["rem", "vh", "px", "ptt"], a: 3 },
+  { q: "`const` in JavaScript defines:", options: ["An immutable binding", "An immutable value always", "Blocked hoisting", "Function-scoped variable"], a: 0 },
+  { q: "Which event fires when the DOM is fully parsed?", options: ["load", "DOMContentLoaded", "beforeunload", "readystatechange:complete"], a: 1 },
+  { q: "Flexbox: center items both axes on a container:", options: ["text-align:center;", "place-items:center;", "justify-content:center; align-items:center;", "align-content:center;"], a: 2 },
+  { q: "Semantic tag for self-contained content (like a card/article):", options: ["<div>", "<section>", "<article>", "<span>"], a: 2 },
+  { q: "CSS pseudo-class to target the first <li>:", options: ["li:first", "li:first-child", "li:first-of-type", "li:first-item"], a: 1 },
+  { q: "CSS Grid: three equal columns:", options: ["grid-template-columns: repeat(3, 1fr);", "grid-columns: 3, 1fr;", "columns: 3fr;", "grid: 3x1fr;"], a: 0 },
+  { q: "Which value is falsy in JavaScript?", options: ['"0"', "[]", "null", "{}"], a: 2 },
+  { q: "Prevent default form submission in JS:", options: ["e.preventDefault()", "return false", "stop()", "e.stopImmediate()"], a: 0 },
+  { q: "Strict equality (===) differs from == because it:", options: ["Compares references only", "Performs type coercion", "Compares without coercion", "Is bitwise"], a: 2 },
+  { q: "Arrow functions have `this` that is:", options: ["Dynamically bound", "Lexically bound", "Globally bound", "Unusable in classes"], a: 1 },
+  { q: "Which are hoisted with initial value `undefined`?", options: ["let", "const", "var", "Functions only"], a: 2 },
+  { q: "HTTP status 422 means:", options: ["Bad Request", "Unauthorized", "Forbidden", "Unprocessable Content"], a: 3 },
+  { q: "Which media query detects user’s color scheme preference?", options: ["@media (prefers-reduced-motion)", "@media (prefers-color-scheme)", "@supports (color-scheme)", "@media (color)"], a: 1 },
+  { q: "requestAnimationFrame callbacks run:", options: ["As soon as possible", "Before the next paint", "After paint finishes", "Every 16ms exactly"], a: 1 },
+];
+
+const TOTAL = QUESTIONS.length;
+const POINT_PER = 5; // 20*5 = 100
+const MAX_SCORE = TOTAL * POINT_PER;
+
+const screens = {
+  home: document.getElementById('screen-home'),
+  rules: document.getElementById('screen-rules'),
+  quiz: document.getElementById('screen-quiz'),
+  result: document.getElementById('screen-result'),
+};
+
+const els = {
+  btnPlay: document.getElementById('btn-play'),
+  btnRules: document.getElementById('btn-rules'),
+  btnStart: document.getElementById('btn-start'),
+  btnCloseRules: document.getElementById('btn-close-rules'),
+  btnExit: document.getElementById('btn-exit'),
+  btnSubmit: document.getElementById('btn-submit'),
+  btnNext: document.getElementById('btn-next'),
+  qtext: document.getElementById('qtext'),
+  qform: document.getElementById('qform'),
+  feedback: document.getElementById('feedback'),
+  pillQno: document.getElementById('pill-qno'),
+  pillScore: document.getElementById('pill-score'),
+  progressFill: document.getElementById('progress-fill'),
+  // result
+  resultStats: document.getElementById('result-stats'),
+  gradeLetter: document.getElementById('grade-letter'),
+  revealBlock: document.getElementById('reveal-block'),
+  retryBlock: document.getElementById('retry-block'),
+  btnRestart: document.getElementById('btn-restart'),
+};
+
+let state = {
+  order: [],    // indices of QUESTIONS in randomized order (optional)
+  i: 0,         // current question index in order
+  score: 0,
+  answered: false,
+  selected: null,
+  startTime: 0,
+};
+
+function show(screenId){
+  for (const [key,sec] of Object.entries(screens)){
+    sec.hidden = (key !== screenId.replace('screen-',''));
+  }
+  // focus a sensible element
+  if(screenId==='screen-home'){ els.btnPlay.focus(); }
+  if(screenId==='screen-rules'){ els.btnStart.focus(); }
+  if(screenId==='screen-quiz'){ els.btnSubmit.focus(); }
+  if(screenId==='screen-result'){ els.btnRestart.focus(); }
+}
+
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+
+function gradeFromScore(score){
+  const pct = Math.round((score / MAX_SCORE) * 100);
+  if (pct >= 90) return {letter:'A', pct};
+  if (pct >= 80) return {letter:'B', pct};
+  if (pct >= 70) return {letter:'C', pct};
+  if (pct >= 60) return {letter:'D', pct};
+  return {letter:'F', pct};
+}
+
+function startQuiz(){
+  state.order = Array.from(QUESTIONS.keys());
+  // keep ordering deterministic or shuffle; choose shuffle for variety
+  shuffle(state.order);
+  state.i = 0;
+  state.score = 0;
+  state.answered = false;
+  state.selected = null;
+  state.startTime = Date.now();
+  renderQuestion();
+  show('screen-quiz');
+}
+
+function renderQuestion(){
+  const qIndex = state.order[state.i];
+  const item = QUESTIONS[qIndex];
+
+  els.qtext.textContent = item.q;
+  els.qform.innerHTML = '';
+  item.options.forEach((opt, idx) => {
+    const id = `opt-${state.i}-${idx}`;
+    const label = document.createElement('label');
+    label.className = 'choice';
+    label.setAttribute('for', id);
+
+    const input = document.createElement('input');
+    input.type = 'radio';
+    input.name = 'choice';
+    input.id = id;
+    input.value = String(idx);
+    input.addEventListener('change', () => {
+      state.selected = idx;
+      els.btnSubmit.disabled = false;
+    });
+
+    const span = document.createElement('span');
+    span.innerHTML = `<span class="mono" aria-hidden="true">(${String.fromCharCode(65+idx)})</span> ${escapeHtml(opt)}`;
+
+    label.appendChild(input);
+    label.appendChild(span);
+    els.qform.appendChild(label);
+  });
+
+  els.feedback.textContent = '';
+  els.feedback.className = 'feedback';
+  els.btnSubmit.disabled = true;
+  els.btnNext.hidden = true;
+
+  els.pillQno.textContent = `Question ${state.i+1} of ${TOTAL}`;
+  els.pillScore.textContent = `Score ${state.score} / ${MAX_SCORE}`;
+  els.progressFill.style.width = `${((state.i)/TOTAL*100).toFixed(1)}%`;
+}
+
+function submitAnswer(e){
+  e.preventDefault();
+  if(state.selected === null) return;
+  if(state.answered) return;
+
+  const qIndex = state.order[state.i];
+  const item = QUESTIONS[qIndex];
+  const correct = (state.selected === item.a);
+
+  state.answered = true;
+  if(correct){
+    state.score += POINT_PER;
+    els.feedback.textContent = "Correct. Proceed.";
+    els.feedback.className = 'feedback ok';
+  }else{
+    els.feedback.textContent = "Incorrect. Review and continue.";
+    els.feedback.className = 'feedback err';
+  }
+
+  // lock radios
+  const inputs = els.qform.querySelectorAll('input[type="radio"]');
+  inputs.forEach((inp, idx) => {
+    inp.disabled = true;
+    // visual highlight
+    const parent = inp.closest('.choice');
+    if (idx === item.a) parent.style.borderColor = 'rgba(112,255,160,.7)';
+    if (idx === state.selected && !correct) parent.style.borderColor = 'rgba(255,95,114,.7)';
+  });
+
+  els.btnSubmit.disabled = true;
+  els.btnNext.hidden = false;
+  els.pillScore.textContent = `Score ${state.score} / ${MAX_SCORE}`;
+}
+
+function nextQuestion(){
+  if(!state.answered) return;
+  state.i++;
+  if(state.i >= TOTAL){
+    showResult();
+  }else{
+    state.answered = false;
+    state.selected = null;
+    renderQuestion();
+  }
+}
+
+function showResult(){
+  const elapsed = Math.round((Date.now() - state.startTime)/1000);
+  const {letter, pct} = gradeFromScore(state.score);
+  els.resultStats.textContent = `Score: ${state.score}/${MAX_SCORE}  •  Accuracy: ${pct}%  •  Time: ${elapsed}s`;
+  els.gradeLetter.textContent = `${letter} (${pct}%)`;
+
+  // fill progress bar to 100 on exit
+  els.progressFill.style.width = '100%';
+
+  // Reveal only if B or higher
+  const isReveal = (letter === 'A' || letter === 'B');
+  els.revealBlock.hidden = !isReveal;
+  els.retryBlock.hidden = isReveal;
+
+  show('screen-result');
+}
+
+function restart(){
+  show('screen-home');
+}
+
+function escapeHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ========== EVENTS ========== */
+els.btnPlay.addEventListener('click', () => show('screen-rules'));
+els.btnRules.addEventListener('click', () => show('screen-rules'));
+els.btnCloseRules.addEventListener('click', () => show('screen-home'));
+els.btnStart.addEventListener('click', startQuiz);
+els.btnExit.addEventListener('click', () => {
+  if (confirm("Exit the quiz and return to Home? Your current progress will be lost.")) {
+    restart();
+  }
+});
+els.btnSubmit.addEventListener('click', submitAnswer);
+els.btnNext.addEventListener('click', nextQuestion);
+els.btnRestart.addEventListener('click', restart);
+
+// keyboard: Enter to submit if focused inside form
+document.addEventListener('keydown', (e) => {
+  if (!screens.quiz.hidden && e.key === 'Enter') {
+    const activeTag = document.activeElement?.tagName?.toLowerCase();
+    // avoid submitting when user toggles <details> etc.
+    if (activeTag !== 'button' && activeTag !== 'a' && activeTag !== 'input') {
+      e.preventDefault();
+      if (!els.btnSubmit.disabled) submitAnswer(e);
+    }
+  }
+});
+</script>
+</body>
+</html>
