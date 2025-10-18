@@ -3,106 +3,140 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>แบบทดสอบโค้ด 25 ข้อ — เกรด B ขึ้นไปจึงเปิดเผยตัวตน</title>
-<meta name="description" content="Quiz โค้ด (HTML/CSS/JS/Logic) 25 ข้อ คะแนนรวม 100 เกรด B ขึ้นไปจึงเฉลยตัวตน พร้อมเพลงเบาๆ ฟังสบาย" />
+<title>แบบทดสอบโค้ด 40 ข้อ · สุ่มทุกครั้ง · รวม 100 คะแนน</title>
+<meta name="description" content="Quiz โค้ดภาษาไทย 3 หมวด: Programming, HTML, CSS รวม 40 ข้อ คะแนนรวม 100 สุ่มลำดับใหม่ทุกครั้ง พร้อมกติกาและวิธีการเล่น และสรุปผลแบบยิ่งใหญ่">
 <style>
   :root{
-    --bg:#0b0b0d; --card:#141418; --muted:#b7bcc4; --text:#e8e9ed;
-    --accent:#7cf7e6; --accent2:#b493ff; --ok:#70ffa0; --err:#ff5f72; --border:#242432; --focus:#62d6ff;
+    --bg:#0b0b0d; --bg2:#131320; --card:#141418; --muted:#b7bcc4; --text:#e8e9ed;
+    --accent:#7cf7e6; --accent2:#b493ff; --ok:#70ff9e; --err:#ff5f72; --border:#242432; --focus:#62d6ff;
+    --gold:#ffd56b; --cyan:#7cf7e6; --purple:#b493ff; --bar:#101018;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     margin:0; font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Inter,"Noto Sans Thai",Tahoma;
-    background:radial-gradient(1100px 700px at 80% -10%,#10101a 20%,transparent 60%), var(--bg);
+    background:
+      radial-gradient(1200px 800px at 80% -10%, var(--bg2) 20%, transparent 60%),
+      radial-gradient(900px 600px at -10% 110%, #11111a 20%, transparent 60%),
+      var(--bg);
     color:var(--text); letter-spacing:.2px;
   }
-  .wrap{max-width:960px;margin:0 auto;padding:24px}
-  .card{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));
-        border:1px solid var(--border); border-radius:20px; padding:28px;
-        box-shadow:0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.02)}
-  h1{margin:0 0 10px; font-size:clamp(26px,3.5vw,40px)}
-  h2{margin:0 0 10px; font-size:clamp(20px,3vw,28px)}
-  p{margin:0 0 12px; color:var(--muted); line-height:1.65}
+  .wrap{max-width:1000px;margin:0 auto;padding:24px}
+  .card{
+    background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+    border:1px solid var(--border); border-radius:22px; padding:28px;
+    box-shadow:0 12px 48px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.02)
+  }
+  h1{margin:0 0 8px; font-size:clamp(28px,4vw,48px); letter-spacing:.6px}
+  h2{margin:0 0 8px; font-size:clamp(20px,3vw,28px)}
+  p{margin:0 0 12px; color:var(--muted); line-height:1.7}
   .muted{color:var(--muted)}
   .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-  .btn{appearance:none;border:0;cursor:pointer;padding:12px 18px;border-radius:14px;
-       background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0b0b0d;font-weight:700;
-       box-shadow:0 10px 24px rgba(124,247,230,.2);transition:transform .08s ease, filter .2s ease}
-  .btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
-  .btn.secondary{background:transparent;color:var(--text);border:1px solid var(--border);box-shadow:none}
+  .btn{
+    appearance:none;border:0;cursor:pointer;padding:12px 18px;border-radius:14px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#0b0b0d; font-weight:800;
+    box-shadow:0 10px 24px rgba(124,247,230,.2); transition:transform .08s ease, filter .2s ease
+  }
+  .btn:hover{transform:translateY(-1px); filter:brightness(1.05)}
+  .btn.secondary{background:transparent;color:var(--text);border:1px solid var(--border);box-shadow:none;font-weight:700}
   .btn.ghost{background:transparent;color:var(--muted)}
   .btn[disabled]{opacity:.5;cursor:not-allowed}
   .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--border);color:var(--muted);background:rgba(255,255,255,.02)}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,#27273a,transparent);margin:18px 0}
+  .hero{display:grid; gap:14px; padding:10px 0 4px}
+  .hero-badges{display:flex; gap:8px; flex-wrap:wrap}
   .choices{display:grid;gap:12px;margin-top:12px}
   .choice{padding:14px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.02);display:flex;gap:12px}
   .choice:hover{border-color:#2e2e3c;background:rgba(255,255,255,.03)}
   .choice input{margin-top:3px}
   .bar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:10px 0 18px;color:var(--muted)}
-  .progress{position:relative;flex:1;height:10px;border-radius:999px;background:#101018;border:1px solid var(--border);overflow:hidden}
+  .progress{position:relative;flex:1;height:10px;border-radius:999px;background:var(--bar);border:1px solid var(--border);overflow:hidden}
   .progress>span{position:absolute;inset:0 0 0 0;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .35s ease}
-  .feedback{margin-top:8px;font-weight:700}
+  .feedback{margin-top:8px;font-weight:800}
   .ok{color:var(--ok)} .err{color:var(--err)}
-  .divider{height:1px;background:linear-gradient(90deg,transparent,#26263a,transparent);margin:18px 0}
   .center{text-align:center}
-  .reveal{background:linear-gradient(180deg,#101018,#0b0b0d);border:1px solid #2b2b3e;border-radius:20px;padding:24px;
-          box-shadow:0 10px 50px rgba(146,128,255,.15), inset 0 0 60px rgba(124,247,230,.03)}
-  pre{white-space:pre-wrap}
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
   :focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:10px}
   details summary{cursor:pointer}
+  .badge-cat{background:rgba(124,247,230,.08);border:1px dashed rgba(124,247,230,.35)}
+  /* Result “ยิ่งใหญ่” */
+  .grand{
+    background:linear-gradient(180deg,#101018, #0b0b0d);
+    border:1px solid #2b2b3e;border-radius:22px;padding:20px 20px 10px;
+    box-shadow:0 10px 50px rgba(146,128,255,.15), inset 0 0 60px rgba(124,247,230,.03)
+  }
+  .grade-badge{
+    display:inline-block; padding:6px 12px; border-radius:12px;
+    background:linear-gradient(135deg,var(--gold),#ff9d6b); color:#1a1200; font-weight:900
+  }
+  .meter{display:grid; gap:8px; margin-top:8px}
+  .meter .rowb{display:grid; grid-template-columns:120px 1fr 60px; gap:10px; align-items:center}
+  .meter .track{height:10px; background:#101018; border:1px solid #2a2a3b; border-radius:999px; overflow:hidden}
+  .meter .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--cyan),var(--purple))}
+  .hint{margin-top:8px; color:var(--muted)}
+  .hero-title{
+    font-size:clamp(22px,3.2vw,34px); font-weight:900;
+    background:linear-gradient(90deg,#fff,#b9f8ff 40%,#cbb6ff);
+    -webkit-background-clip:text; background-clip:text; color:transparent
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <!-- HOME -->
+
+  <!-- LANDING -->
   <section id="home" class="card" role="region" aria-label="หน้าแรก">
-    <h1>สวัสดีรุ่นน้อง! ฉันคือ ●</h1>
-    <p>พิสูจน์ทักษะโค้ดของเธอให้ได้เกรด <strong>B</strong> ขึ้นไป แล้วฉันจะเฉลยตัวตนให้รู้จัก</p>
-    <div class="divider"></div>
-    <div class="row">
-      <button class="btn" id="btnPlay">เริ่มเล่น</button>
-      <button class="btn secondary" id="btnRules">กติกา</button>
-      <button class="btn secondary" id="btnMusic">ดนตรี: ปิด</button>
-      <span class="pill">25 ข้อ · ข้อละ 4 คะแนน · รวม 100</span>
+    <div class="hero">
+      <div class="hero-badges">
+        <span class="pill badge-cat">Programming · 10</span>
+        <span class="pill badge-cat">HTML · 15</span>
+        <span class="pill badge-cat">CSS · 15</span>
+        <span class="pill">รวม 40 ข้อ · คะแนนรวม 100</span>
+      </div>
+      <h1 class="hero-title">คุณอยากรู้ชื่อฉันใช่ไหมล่ะรุ่นน้อง</h1>
+      <p><strong>ชื่อของฉันก็คือ…. </strong><span class="muted">อุ๊ยสัญญาณหาย 🤯 ไปตอบคำถามเอาแล้วกัน!</span></p>
+      <p>แบบทดสอบนี้สุ่มลำดับใหม่ทุกครั้ง ตั้งแต่ง่ายไปจนยาก จบแล้วจะมีสรุปใหญ่บอก “คุณเก่งด้านไหน” และ “เกรดเฉลี่ยเท่าไหร่”</p>
     </div>
-    <details style="margin-top:10px">
-      <summary class="muted">มีอะไรในแบบทดสอบนี้?</summary>
-      <ul class="muted">
-        <li>หัวข้อ: HTML / CSS / JavaScript / Logic สำหรับนักพัฒนา</li>
-        <li>คำถาม 25 ข้อ สุ่มลำดับใหม่ทุกครั้ง</li>
-        <li>เกณฑ์ตัดเกรด: A (90–100), B (80–89), C (70–79), D (60–69), F (&lt;60)</li>
-        <li>เปิดเผยตัวตนเฉพาะเมื่อได้เกรด <strong>B</strong> ขึ้นไป</li>
-      </ul>
-    </details>
+
+    <div class="divider"></div>
+
+    <div class="row">
+      <button class="btn" id="btnPlay">เริ่มทำแบบทดสอบ</button>
+      <button class="btn secondary" id="btnRules">กติกา & วิธีการเล่น</button>
+    </div>
   </section>
 
   <!-- RULES -->
   <section id="rules" class="card" role="dialog" aria-modal="true" hidden>
-    <h2>กติกา & การให้คะแนน</h2>
-    <ul class="muted">
-      <li>คำถามทั้งหมด <strong>25 ข้อ</strong> ตัวเลือก 4 ช้อยส์</li>
-      <li>ข้อละ <strong>4 คะแนน</strong> รวม <strong>100 คะแนน</strong></li>
-      <li>ได้เกรด <strong>B</strong> ขึ้นไป จึงเห็นข้อความแนะนำตัว</li>
-      <li>เริ่มใหม่ทุกครั้ง ลำดับข้อ <strong>สลับแตกต่าง</strong> กัน</li>
-      <li>มีเพลงบรรเลงเบา ๆ เปิด/ปิดได้</li>
-    </ul>
-    <div class="row">
+    <h2>กติกา & วิธีการเล่น</h2>
+    <ol class="muted" style="margin-left:20px">
+      <li><strong>เนื้อหา</strong>: 3 หมวด — Programming (10), HTML (15), CSS (15) รวม 40 ข้อ</li>
+      <li><strong>รูปแบบ</strong>: คำถาม 4 ช้อยส์ เลือกคำตอบเดียว</li>
+      <li><strong>คะแนน</strong>: ข้อละ <strong>2.5 คะแนน</strong> รวม <strong>100 คะแนน</strong></li>
+      <li><strong>สุ่ม</strong>: เริ่มใหม่ทุกครั้ง ลำดับคำถามจะเปลี่ยน</li>
+      <li><strong>ขั้นตอน</strong>: เลือกคำตอบ → กด “ตอบเลย” → เห็นผลถูก/ผิด → กด “ข้อถัดไป”</li>
+      <li><strong>ออกกลางคัน</strong>: “ออกไปหน้าแรก” (ความคืบหน้าจะหายไป)</li>
+      <li><strong>จบการทดสอบ</strong>: มีสรุปใหญ่พร้อมเกรด, เปอร์เซ็นต์, จุดแข็งรายหมวด, คำใบ้พัฒนา</li>
+    </ol>
+    <div class="row" style="margin-top:6px">
       <button class="btn" id="btnStart">เริ่มทำแบบทดสอบ</button>
       <button class="btn secondary" id="btnCloseRules">ปิด</button>
     </div>
   </section>
 
   <!-- QUIZ -->
-  <section id="quiz" class="card" role="region" aria-label="ทำแบบทดสอบ" hidden>
+  <section id="quiz" class="card" role="region" aria-label="แบบทดสอบ" hidden>
     <div class="bar">
-      <span class="pill" id="pillNo">ข้อที่ 1/25</span>
+      <span class="pill" id="pillCat">หมวด: -</span>
+      <span class="pill" id="pillNo">ข้อที่ 1/40</span>
       <div class="progress" aria-label="ความคืบหน้า"><span id="prog"></span></div>
       <span class="pill" id="pillScore">คะแนน 0/100</span>
     </div>
-    <div id="qtext" style="font-weight:700;font-size:18px;margin-bottom:8px">ข้อความคำถาม</div>
+
+    <div id="qtext" style="font-weight:800;font-size:18px;margin-bottom:8px">ข้อความคำถาม</div>
     <form id="qform" class="choices" aria-labelledby="qtext"></form>
     <div id="feedback" class="feedback" aria-live="polite"></div>
+
     <div class="row" style="margin-top:8px">
       <button class="btn" id="btnSubmit" disabled>ตอบเลย</button>
       <button class="btn secondary" id="btnNext" hidden>ข้อถัดไป</button>
@@ -110,187 +144,229 @@
     </div>
   </section>
 
-  <!-- RESULT -->
-  <section id="result" class="card center" hidden>
-    <h2>สรุปผล</h2>
-    <p class="muted" id="stat">คุณทำแบบทดสอบเสร็จแล้ว</p>
-    <p><strong>เกรดของคุณ:</strong> <span id="grade" class="mono"></span></p>
+  <!-- RESULT (GRAND) -->
+  <section id="result" class="card" hidden>
+    <h2 class="center">พิธีประกาศผลอันยิ่งใหญ่</h2>
+    <p class="muted center" id="stat">คุณทำแบบทดสอบเสร็จแล้ว</p>
 
-    <div id="reveal" class="reveal" hidden>
-      <p class="muted">You’re strong. You’ve earned this.</p>
-      <p style="margin:8px 0 14px;font-weight:700">ตึงเหมือนกันนะเนี่ย ฉันขอแนะนำตัวเอง</p>
-      <pre class="mono">
-( Change 53 41 59 53 41 4D 4F 4E 45 to letters and change  IECI ICHD to numbers  )
-//class:2CW2
+    <div class="grand" style="margin-top:10px">
+      <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap">
+        <div>
+          <div style="font-size:18px;margin-bottom:4px">คะแนนรวม</div>
+          <div style="font-size:28px;font-weight:900"><span id="scoreFinal" class="mono"></span> / 100</div>
+          <div class="muted">ความแม่นยำ: <span id="pctFinal" class="mono"></span>% · เวลา: <span id="timeFinal" class="mono"></span>s</div>
+        </div>
+        <div>
+          <div style="font-size:18px;margin-bottom:4px">เกรดของคุณ</div>
+          <div class="grade-badge" id="gradeBadge">A</div>
+        </div>
+      </div>
 
-SAYSAMONE
-9539 9384
-      </pre>
+      <div class="divider"></div>
+
+      <h3 style="margin:0 0 8px">คุณเก่งด้านไหน</h3>
+      <div class="meter" id="meter">
+        <!-- rows injected: (หมวด) bar percent -->
+      </div>
+
+      <div class="divider"></div>
+
+      <h3 style="margin:0 0 8px">เกรดเฉลี่ย & คำใบ้</h3>
+      <p class="muted">เกรดเฉลี่ย (คิดจากเปอร์เซ็นต์รวม): <strong><span id="avgGrade" class="mono"></span></strong></p>
+      <ul id="hints" class="hint">
+        <!-- dynamic hints -->
+      </ul>
     </div>
 
-    <div id="retry" hidden>
-      <p class="muted">ยังไม่ถึง B … ลองใหม่อีกครั้งแล้วกลับมาเฉลยตัวตนกัน</p>
-    </div>
-
-    <div class="row" style="justify-content:center;margin-top:8px">
+    <div class="row center" style="justify-content:center;margin-top:12px">
       <button class="btn" id="btnRestart">เริ่มใหม่</button>
     </div>
   </section>
+
 </div>
 
 <script>
-/* ===========================
-   เพลงเบา ๆ ด้วย Web Audio API
-   - ปุ่ม "ดนตรี: เปิด/ปิด"
-   - โทน ambient ง่าย ๆ : คอร์ดสลับซับซ้อนเล็กน้อย + ลดเสียงเบา
-=========================== */
-let audioCtx=null, master, isMusicOn=false, musicTimer=null;
+/* ===== Utilities ===== */
+const $ = (id)=>document.getElementById(id);
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
+function escapeHtml(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function fmtScore(x){ return (Math.round(x*10)/10).toString().replace(/\.0$/,''); }
 
-function startMusic(){
-  if(isMusicOn) return;
-  if(!audioCtx){
-    audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-    master = audioCtx.createGain();
-    master.gain.value = 0.06; // เบามาก
-    master.connect(audioCtx.destination);
-  }
-  isMusicOn = true;
-  scheduleAmbient();
-}
-function stopMusic(){
-  isMusicOn = false;
-  if(musicTimer){ clearTimeout(musicTimer); musicTimer=null; }
-  if(master){ master.gain.cancelScheduledValues(audioCtx.currentTime); master.gain.linearRampToValueAtTime(0.0, audioCtx.currentTime+0.3); }
-}
-
-function scheduleAmbient(){
-  if(!isMusicOn) return;
-  const now = audioCtx.currentTime;
-  const chordSets = [
-    [0,7,12],       // C5 power
-    [2,9,14],       // D
-    [-3,4,9],       // Ab-ish
-    [4,11,16],      // E
-  ];
-  const set = chordSets[Math.floor(Math.random()*chordSets.length)];
-  set.forEach(semi => playTone(220*Math.pow(2, semi/12), 2.8, 0.02)); // เบาและสั้น
-  musicTimer = setTimeout(scheduleAmbient, 3200 + Math.random()*1200);
-}
-
-function playTone(freq, dur, g){
-  const o = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  o.type = 'sine';
-  o.frequency.value = freq;
-  gain.gain.setValueAtTime(0, audioCtx.currentTime);
-  gain.gain.linearRampToValueAtTime(g, audioCtx.currentTime+0.2);
-  gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime+dur);
-  o.connect(gain); gain.connect(master);
-  o.start(); o.stop(audioCtx.currentTime+dur+0.05);
-}
-
-/* ===========================
-   คลังคำถาม (25 ข้อ) — โค้ดเท่านั้น
-   ข้อละ 4 คะแนน รวม 100
-=========================== */
-const QUESTIONS = [
-  {q:"แท็กใดคือหัวเรื่องหลักของหน้าเอกสาร HTML?", o:["<title>","<h1>","<head>","<header>"], a:1},
-  {q:"แอตทริบิวต์ใดกำหนดแหล่งรูปภาพใน <img>?", o:["href","src","alt","data"], a:1},
-  {q:"คุณสมบัติ CSS ใดใช้เปลี่ยนสีอักษร?", o:["font-style","color","text-decoration","fill"], a:1},
-  {q:"เพื่อประสิทธิภาพ สคริปต์มักวางไว้ตรงไหน?", o:["<head>","ต้น <body>","ท้าย <body>","ก่อน </html>"], a:2},
-  {q:"ตัวเลือก CSS ที่เลือก <p> ที่อยู่ภายใน .card เท่านั้น (descendant) คือ?", o:[".card + p",".card > p",".card p","p.card"], a:2},
-  {q:"หน่วยใดไม่ใช่หน่วยที่ถูกต้องของ CSS?", o:["rem","vh","px","ptt"], a:3},
-  {q:"const ใน JavaScript หมายถึงอะไร?", o:["ผูกตัวแปรแบบเปลี่ยนตัวชี้ไม่ได้","ค่าห้ามเปลี่ยนเสมอ","โฮสต์แบบบล็อก","ขอบเขตฟังก์ชัน"], a:0},
-  {q:"เหตุการณ์ใดเกิดเมื่อ DOM ถูกพาร์สครบแล้ว?", o:["load","DOMContentLoaded","beforeunload","readystatechange:complete"], a:1},
-  {q:"จะจัดกึ่งกลางทั้งแกนใน Flex Container ควรใช้?", o:["text-align:center;","place-items:center;","justify-content:center; align-items:center;","align-content:center;"], a:2},
-  {q:"แท็กเชิงความหมายที่เหมาะกับบทความ/การ์ดแบบอิสระคือ?", o:["<div>","<section>","<article>","<span>"], a:2},
-  {q:"pseudo-class ที่เลือก <li> ตัวแรกคือ?", o:["li:first","li:first-child","li:first-of-type","li:first-item"], a:1},
-  {q:"CSS Grid: สร้าง 3 คอลัมน์เท่ากัน?", o:["grid-template-columns: repeat(3,1fr);","grid-columns:3,1fr;","columns:3fr;","grid:3x1fr;"], a:0},
-  {q:"ค่าต่อไปนี้ใดเป็น falsy ใน JS?", o:['"0"',"[]","null","{}"], a:2},
-  {q:"ยกเลิกการ submit ของฟอร์มใน JS ใช้อะไร?", o:["e.preventDefault()","return false","stop()","e.stopImmediate()"], a:0},
-  {q:"=== ต่างจาก == อย่างไร?", o:["เทียบอ้างอิงเท่านั้น","มี type coercion","ไม่มี type coercion","เป็นบิตไวส์"], a:2},
-  {q:"this ของ arrow function เป็นแบบใด?", o:["ผูกแบบไดนามิก","ผูกแบบ lexical","ผูกแบบ global","ใช้ใน class ไม่ได้"], a:1},
-  {q:"ตัวใดถูก hoist ด้วยค่าเริ่มต้น undefined?", o:["let","const","var","function เท่านั้น"], a:2},
-  {q:"HTTP สถานะ 422 หมายถึง?", o:["Bad Request","Unauthorized","Forbidden","Unprocessable Content"], a:3},
-  {q:"Media query ใดตรวจโหมดสีของผู้ใช้?", o:["prefers-reduced-motion","prefers-color-scheme","@supports(color-scheme)","@media(color)"], a:1},
-  {q:"requestAnimationFrame ทำงานเมื่อไหร่?", o:["โดยเร็วที่สุด","ก่อนวาดเฟรมถัดไป","หลังวาดเสร็จ","ทุก 16ms เสมอ"], a:1},
-  {q:"เลือกเฉพาะพยางค์/คำภายในองค์ประกอบใช้ pseudo-element ใด?", o:["::marker","::first-letter","::backdrop","::selection"], a:1},
-  {q:"CSS specificity ใดสูงสุด?", o:["ตัวเลือกองค์ประกอบ","คลาส","ไอดี","ตัวเลือก *"], a:2},
-  {q:"Event Delegation ช่วยอย่างไร?", o:["เพิ่มจำนวนตัวดักจับ","ลดจำนวนตัวดักจับ","ยกเลิก capture phase","หยุด bubbling"], a:1},
-  {q:"localStorage จะคงอยู่จนกว่า…", o:["ปิดแท็บ","รีสตาร์ทเบราว์เซอร์","ถูกลบด้วยผู้ใช้/สคริปต์","ครบ 24 ชั่วโมง"], a:2},
-  {q:"requestIdleCallback เหมาะกับงานแบบใด?", o:["เร่งด่วนเฟรมต่อไป","เบื้องหลัง/ว่างงาน","เครือข่ายหนัก","บล็อค UI"], a:1},
+/* ===== Question Banks (40) ===== */
+/** type: {cat:'Programming'|'HTML'|'CSS', q:string, o:string[4], a:number} */
+const PROG = [
+  {cat:'Programming', q:'บิต (bit) และ ไบต์ (byte) ต่างกันอย่างไร?', o:['1 บิต = 8 ไบต์','1 ไบต์ = 8 บิต','เท่ากัน','ไม่เกี่ยวกัน'], a:1},
+  {cat:'Programming', q:'เวลาเฉลี่ยของ Binary Search คือ?', o:['O(n)','O(log n)','O(n log n)','O(1)'], a:1},
+  {cat:'Programming', q:'ไฟล์ .exe โดยปกติคือไฟล์ประเภทใด?', o:['สคริปต์','รันได้ (Executable)','เอกสาร','ฐานข้อมูล'], a:1},
+  {cat:'Programming', q:'CLI ย่อมาจากอะไร?', o:['Command Line Interface','Computer Logic Input','Code Link Interop','Central Logic Interface'], a:0},
+  {cat:'Programming', q:'IPv4 ปกติมีรูปแบบใด?', o:['ตัวอักษร 8 ตัว','เลขฐานสิบ 4 ชุดคั่นด้วยจุด','เลขฐานสิบหก 6 ชุด','ตัวเลขสุ่ม'], a:1},
+  {cat:'Programming', q:'Git “commit” คือ?', o:['ลบไฟล์ทั้งหมด','จดบันทึกสถานะการเปลี่ยนแปลง','อัปโหลดไปเซิร์ฟเวอร์เสมอ','รีเซ็ตโปรเจ็กต์'], a:1},
+  {cat:'Programming', q:'SQL คำสั่งเลือกข้อมูลพื้นฐานคือ?', o:['FIND','GET','SELECT','CHOOSE'], a:2},
+  {cat:'Programming', q:'ตัวดำเนินการลอจิก AND/OR ข้อใดถูก?', o:['true AND false = true','true OR false = true','false OR false = true','true AND true = false'], a:1},
+  {cat:'Programming', q:'RAM ต่างจาก SSD อย่างไร?', o:['RAM เก็บถาวร','SSD เร็วกว่า RAM เสมอ','RAM ไว/ชั่วคราว, SSD ถาวร/ช้ากว่า','เหมือนกัน'], a:2},
+  {cat:'Programming', q:'ภาษาที่รันบนเบราว์เซอร์โดยตรงทั่วไปคือ?', o:['C++','JavaScript','Python','Java'], a:1},
 ];
 
-const TOTAL = 25;
-const POINT_PER = 4;
-const MAX_SCORE = TOTAL * POINT_PER;
+const HTMLQ = [
+  {cat:'HTML', q:'แท็กหัวเรื่องหลักของหน้า?', o:['<title>','<h1>','<head>','<header>'], a:1},
+  {cat:'HTML', q:'แอตทริบิวต์แหล่งรูปภาพของ <img> คือ?', o:['href','src','alt','data'], a:1},
+  {cat:'HTML', q:'ลิงก์ไปหน้าอื่นใช้แท็กใด?', o:['<a>','<link>','<nav>','<route>'], a:0},
+  {cat:'HTML', q:'แท็กเชิงความหมายสำหรับเนื้อหาบทความอิสระ?', o:['<div>','<section>','<article>','<span>'], a:2},
+  {cat:'HTML', q:'ส่งฟอร์มโดยไม่รีเฟรชหน้า ควรใช้?', o:['method="GET" เท่านั้น','method="POST" เท่านั้น','JavaScript จัดการ submit','แท็บใหม่'], a:2},
+  {cat:'HTML', q:'อินพุตที่ตรวจอีเมลพื้นฐานคือ type ใด?', o:['text','email','url','search'], a:1},
+  {cat:'HTML', q:'การเชื่อม <label> กับอินพุตใช้แอตทริบิวต์?', o:['name','for','id','value'], a:1},
+  {cat:'HTML', q:'คุณสมบัติ alt ของ <img> ใช้เพื่อ?', o:['ตกแต่ง','SEO เท่านั้น','คำอธิบายเมื่อรูปโหลดไม่ได้/ช่วยการเข้าถึง','ไม่จำเป็น'], a:2},
+  {cat:'HTML', q:'ปรับสเกลบนมือถือควรใช้ meta ใด?', o:['theme-color','charset','viewport','refresh'], a:2},
+  {cat:'HTML', q:'แท็กสำหรับรายการเรียงลำดับคือ?', o:['<ul>','<ol>','<li>','<dl>'], a:1},
+  {cat:'HTML', q:'ส่วนหัวของตารางคือ?', o:['<thead>','<tfoot>','<tbody>','<caption>'], a:0},
+  {cat:'HTML', q:'ค่า type ปริยายของ <button> ในฟอร์มมักเป็น?', o:['button','submit','reset','menu'], a:1},
+  {cat:'HTML', q:'ใส่สคริปต์แบบโหลดหลังพาร์สใช้?', o:['defer','async','module','nomodule'], a:0},
+  {cat:'HTML', q:'องค์ประกอบใดเป็น inline?', o:['<div>','<span>','<section>','<article>'], a:1},
+  {cat:'HTML', q:'แอตทริบิวต์ใดช่วยผู้อ่านจอ (accessibility)?', o:['data-*','aria-label','tabindex="-1"','draggable'], a:1},
+];
 
-const $ = (id)=>document.getElementById(id);
+const CSSQ = [
+  {cat:'CSS', q:'เปลี่ยนสีอักษรใช้ property ใด?', o:['font-style','color','text-decoration','fill'], a:1},
+  {cat:'CSS', q:'เลือกองค์ประกอบด้วยคลาสใช้?', o:['#name','.name','name','*name'], a:1},
+  {cat:'CSS', q:'Specificity สูงสุดคือ?', o:['องค์ประกอบ','คลาส','ไอดี','ตัวเลือก *'], a:2},
+  {cat:'CSS', q:'กล่องโมเดล (box model) ไม่รวมอะไรใน content-box?', o:['content','padding','border','margin'], a:3},
+  {cat:'CSS', q:'จัดกึ่งกลางทั้งแนวนอน/ตั้งใน Flex ใช้?', o:['text-align:center','align-content:center','justify-content:center; align-items:center;','place-content: center only'], a:2},
+  {cat:'CSS', q:'Grid 3 คอลัมน์เท่ากัน?', o:['grid-columns:3','grid:3x1fr','grid-template-columns: repeat(3,1fr);','columns:3fr'], a:2},
+  {cat:'CSS', q:'Media query พื้นฐานสำหรับกว้าง ≥ 768px?', o:['@media (min-width:768px)','@media (width>=768)','@media screen 768','@mq 768 up'], a:0},
+  {cat:'CSS', q:'position: sticky จะติดกับ?', o:['viewport เสมอ','บรรพบุรุษที่เลื่อนスク롤ได้','<html>','<body>'], a:1},
+  {cat:'CSS', q:'z-index ทำงานเมื่อองค์ประกอบ…', o:['มี position ที่ไม่ใช่ static','เป็น block เท่านั้น','เป็น flex เท่านั้น','อยู่บน body เท่านั้น'], a:0},
+  {cat:'CSS', q:'ซ่อนและกันพื้นที่ต่างกันคือ?', o:['display:none ซ่อนและกันพื้นที่','visibility:hidden ซ่อนและกันพื้นที่','display:none ซ่อนและไม่กันพื้นที่','ทั้งคู่กันพื้นที่'], a:2},
+  {cat:'CSS', q:':hover และ :focus คือ?', o:['pseudo-element','pseudo-class','attribute selector','ไม่เกี่ยว'], a:1},
+  {cat:'CSS', q:'เลือกแถวที่ 2 ในรายการใช้?', o:[':nth-child(2)',':nth-of-type(2)',':first-child(2)',':row(2)'], a:0},
+  {cat:'CSS', q:'box-sizing:border-box มีผลว่า?', o:['width รวม padding/border','width ไม่รวม padding/border','ไม่เกี่ยวกับ width','ลบ margin อัตโนมัติ'], a:0},
+  {cat:'CSS', q:'ตัวแปร CSS ประกาศแบบใด?', o:['$brand: #fff','--brand: #fff','var-brand: #fff','@brand: #fff'], a:1},
+  {cat:'CSS', q:'ใช้ตัวแปร CSS อย่างไร?', o:['use(--brand)','var(--brand)','get(--brand)','value(--brand)'], a:1},
+];
+
+const BANK = [...PROG, ...HTMLQ, ...CSSQ]; // 40 ข้อ
+
+/* ===== State & Config ===== */
+const TOTAL = 40;
+const POINT_PER = 2.5; // 40 * 2.5 = 100
+const MAX_SCORE = TOTAL * POINT_PER;
+const CAT_TARGET = { Programming:10, HTML:15, CSS:15 };
+
 const screens = {home:$("home"), rules:$("rules"), quiz:$("quiz"), result:$("result")};
 const els = {
   btnPlay:$("btnPlay"), btnRules:$("btnRules"), btnStart:$("btnStart"), btnCloseRules:$("btnCloseRules"),
-  btnExit:$("btnExit"), btnSubmit:$("btnSubmit"), btnNext:$("btnNext"), btnRestart:$("btnRestart"), btnMusic:$("btnMusic"),
-  pillNo:$("pillNo"), pillScore:$("pillScore"), prog:$("prog"), qtext:$("qtext"), qform:$("qform"), feedback:$("feedback"),
-  stat:$("stat"), grade:$("grade"), reveal:$("reveal"), retry:$("retry"),
+  btnExit:$("btnExit"), btnSubmit:$("btnSubmit"), btnNext:$("btnNext"), btnRestart:$("btnRestart"),
+  pillCat:$("pillCat"), pillNo:$("pillNo"), pillScore:$("pillScore"), prog:$("prog"),
+  qtext:$("qtext"), qform:$("qform"), feedback:$("feedback"),
+  stat:$("stat"), scoreFinal:$("scoreFinal"), pctFinal:$("pctFinal"), timeFinal:$("timeFinal"),
+  gradeBadge:$("gradeBadge"), meter:$("meter"), avgGrade:$("avgGrade"), hints:$("hints"),
 };
 
-let state = {
-  order: [], i:0, score:0, selected:null, answered:false, startTime:0
-};
+let state = { order:[], i:0, score:0, selected:null, answered:false, startTime:0, perCat:{Programming:0, HTML:0, CSS:0} };
 
-function show(name){
-  for(const k in screens) screens[k].hidden = (k!==name);
+/* ===== Fun messages (เกรียน ๆ) ===== */
+const MSG_OK = [
+  "ใกล้แล้วนะ เก่งจังเลย 🤟",
+  "คมจัด! สมองไวเว่อร์ ✨",
+  "ถูกต้องครับท่านโปร! 🧠",
+  "สุดยอด…ท่าไม้ตายใช้ได้อยู่ 🔥",
+  "อย่างเท่! อีกนิดคือระดับเซียน 😎",
+  "น้องนี่ไม่ธรรมดาเลยนะ 👏",
+  "ตอบได้ไงเนี่ย เกินไปแล้ว 🤯",
+];
+const MSG_ERR = [
+  "อุ๊ย ผิดอีกแล้วหรอ 😂",
+  "เกือบละๆ แต่ยังไม่ใช่นะจ๊ะ 😉",
+  "ตอบอะไรคะเนี่ย 😏 ลองคิดใหม่",
+  "อีกนิดเดียว ใจเย็นก่อนนะ 🤏",
+  "ครั้งนี้พลาด แต่ไม่เป็นไร ลุยต่อ!",
+  "เอ้าาาา หลุดโค้งไปเฉย 🤡",
+];
+
+/* ===== Basic helpers ===== */
+function show(name){ for(const k in screens) screens[k].hidden = (k!==name); }
+function gradeFromPct(p){
+  if(p>=90) return 'A';
+  if(p>=80) return 'B';
+  if(p>=70) return 'C';
+  if(p>=60) return 'D';
+  return 'F';
 }
-function shuffle(arr){ for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
+
+/* ===== Flow ===== */
+$("btnPlay").addEventListener('click', ()=>show('rules'));
+$("btnRules").addEventListener('click', ()=>show('rules'));
+$("btnCloseRules").addEventListener('click', ()=>show('home'));
+$("btnStart").addEventListener('click', startQuiz);
+$("btnExit").addEventListener('click', ()=>{
+  if(confirm('ออกจากแบบทดสอบและกลับหน้าแรก? ความคืบหน้าจะหายไป')) restart();
+});
+$("btnSubmit").addEventListener('click', submitAnswer);
+$("btnNext").addEventListener('click', nextQuestion);
+$("btnRestart").addEventListener('click', restart);
+
+// Enter เพื่อส่งคำตอบอย่างรวดเร็ว (ถ้าเลือกแล้ว)
+document.addEventListener('keydown',(e)=>{
+  if(!screens.quiz.hidden && e.key==='Enter'){
+    const tag = document.activeElement?.tagName?.toLowerCase();
+    if(tag!=='button' && tag!=='input' && !$("btnSubmit").disabled) submitAnswer(e);
+  }
+});
 
 function startQuiz(){
-  // เลือก 25 ข้อจากคลัง (ที่นี่คลังมี 25 พอดี) และสุ่มลำดับ
-  state.order = shuffle([...Array(QUESTIONS.length).keys()]).slice(0,TOTAL);
+  state.order = shuffle([...Array(BANK.length).keys()]); // สุ่มใหม่ทุกครั้ง
   state.i=0; state.score=0; state.selected=null; state.answered=false; state.startTime=Date.now();
-  renderQuestion(); show("quiz");
+  state.perCat = {Programming:0, HTML:0, CSS:0};
+  renderQuestion(); show('quiz');
 }
 
 function renderQuestion(){
-  const qi = state.order[state.i];
-  const item = QUESTIONS[qi];
-  els.qtext.textContent = item.q;
-  els.qform.innerHTML="";
+  const qi = state.order[state.i], item = BANK[qi];
+  els.pillCat.textContent = `หมวด: ${item.cat}`;
+  els.pillNo.textContent  = `ข้อที่ ${state.i+1}/${TOTAL}`;
+  els.qtext.innerHTML     = escapeHtml(item.q);
+  els.qform.innerHTML = '';
   item.o.forEach((opt,idx)=>{
     const id=`opt-${state.i}-${idx}`;
-    const label=document.createElement("label");
-    label.className="choice"; label.setAttribute("for",id);
-    const input=document.createElement("input");
-    input.type="radio"; input.name="choice"; input.id=id; input.value=idx;
-    input.addEventListener("change",()=>{ state.selected=idx; els.btnSubmit.disabled=false; });
-    const span=document.createElement("span"); span.innerHTML=`<span class="mono">(${String.fromCharCode(65+idx)})</span> ${escapeHtml(opt)}`;
+    const label=document.createElement('label'); label.className='choice'; label.setAttribute('for',id);
+    const input=document.createElement('input'); input.type='radio'; input.name='choice'; input.id=id; input.value=idx;
+    input.addEventListener('change',()=>{ state.selected=idx; els.btnSubmit.disabled=false; });
+    const span=document.createElement('span'); span.innerHTML = `<span class="mono">(${String.fromCharCode(65+idx)})</span> ${escapeHtml(opt)}`;
     label.appendChild(input); label.appendChild(span);
     els.qform.appendChild(label);
   });
-  els.feedback.textContent=""; els.feedback.className="feedback";
+  els.feedback.textContent=''; els.feedback.className='feedback';
   els.btnSubmit.disabled=true; els.btnNext.hidden=true;
-  els.pillNo.textContent=`ข้อที่ ${state.i+1}/${TOTAL}`;
-  els.pillScore.textContent=`คะแนน ${state.score}/${MAX_SCORE}`;
-  els.prog.style.width=`${(state.i/TOTAL*100).toFixed(1)}%`;
+  els.pillScore.textContent = `คะแนน ${fmtScore(state.score)}/${MAX_SCORE}`;
+  els.prog.style.width = `${(state.i/TOTAL*100).toFixed(1)}%`;
 }
 
 function submitAnswer(e){
   e.preventDefault();
   if(state.selected===null || state.answered) return;
-  const qi = state.order[state.i];
-  const item = QUESTIONS[qi];
+  const qi = state.order[state.i], item = BANK[qi];
   const correct = (state.selected===item.a);
-  state.answered=true;
-  if(correct){ state.score += POINT_PER; els.feedback.textContent="ถูกต้อง เดินหน้าต่อ"; els.feedback.className="feedback ok"; }
-  else{ els.feedback.textContent="ผิด ลองทบทวนแล้วไปต่อ"; els.feedback.className="feedback err"; }
-  // ล็อคตัวเลือก + ไฮไลต์
+  state.answered = true;
+
+  if(correct){
+    state.score += POINT_PER;
+    state.perCat[item.cat] += 1;
+    els.feedback.textContent = MSG_OK[Math.floor(Math.random()*MSG_OK.length)];
+    els.feedback.className = 'feedback ok';
+  }else{
+    els.feedback.textContent = MSG_ERR[Math.floor(Math.random()*MSG_ERR.length)];
+    els.feedback.className = 'feedback err';
+  }
+
+  // ล็อคและไฮไลต์
   els.qform.querySelectorAll('input[type="radio"]').forEach((inp,idx)=>{
     inp.disabled=true;
-    const parent=inp.closest('.choice');
-    if(idx===item.a) parent.style.borderColor='rgba(112,255,160,.7)';
-    if(idx===state.selected && !correct) parent.style.borderColor='rgba(255,95,114,.7)';
+    const box=inp.closest('.choice');
+    if(idx===item.a) box.style.borderColor='rgba(112,255,160,.75)';
+    if(idx===state.selected && !correct) box.style.borderColor='rgba(255,95,114,.8)';
   });
+
   els.btnSubmit.disabled=true; els.btnNext.hidden=false;
-  els.pillScore.textContent=`คะแนน ${state.score}/${MAX_SCORE}`;
+  els.pillScore.textContent = `คะแนน ${fmtScore(state.score)}/${MAX_SCORE}`;
 }
 
 function nextQuestion(){
@@ -300,64 +376,70 @@ function nextQuestion(){
   else{ state.selected=null; state.answered=false; renderQuestion(); }
 }
 
-function gradeFromScore(score){
-  const pct = Math.round(score/MAX_SCORE*100);
-  if(pct>=90) return {letter:'A', pct};
-  if(pct>=80) return {letter:'B', pct};
-  if(pct>=70) return {letter:'C', pct};
-  if(pct>=60) return {letter:'D', pct};
-  return {letter:'F', pct};
-}
-
 function showResult(){
   const elapsed = Math.round((Date.now()-state.startTime)/1000);
-  const {letter,pct} = gradeFromScore(state.score);
-  els.stat.textContent = `คะแนน: ${state.score}/${MAX_SCORE} • ความแม่นยำ: ${pct}% • เวลา: ${elapsed} วินาที`;
-  els.grade.textContent = `${letter} (${pct}%)`;
-  const pass = (letter==='A' || letter==='B');
-  els.reveal.hidden = !pass;
-  els.retry.hidden = pass;
+  const pct = Math.round(state.score / MAX_SCORE * 100);
+  const grade = gradeFromPct(pct);
+
+  // header stats
+  $("stat").textContent = `ทำครบ ${TOTAL} ข้อแล้ว`;
+  els.scoreFinal.textContent = fmtScore(state.score);
+  els.pctFinal.textContent = pct.toString();
+  els.timeFinal.textContent = elapsed.toString();
+  els.gradeBadge.textContent = `${grade} (${pct}%)`;
+
+  // meter per category + hints
+  els.meter.innerHTML = '';
+  els.hints.innerHTML = '';
+  const cats = ['Programming','HTML','CSS'];
+  const tips = {
+    Programming: [
+      "ทบทวน Big-O และโครงสร้างข้อมูลพื้นฐาน (array, stack, queue, hash)",
+      "ฝึกคิดลำดับขั้นตอน (algorithmic thinking) จากปัญหาสั้นๆ"
+    ],
+    HTML: [
+      "โฟกัส semantic tags, ฟอร์ม, และการเข้าถึง (ARIA)",
+      "ฝึก defer/async, meta viewport และโครงสร้างตาราง"
+    ],
+    CSS: [
+      "ทบทวน specificity, Flex/Grid และ box-model ให้แม่น",
+      "ลองทำเลย์เอาต์ responsive ด้วย media query"
+    ]
+  };
+
+  cats.forEach(cat=>{
+    const correct = state.perCat[cat];
+    const total   = CAT_TARGET[cat];
+    const p = Math.round((correct/total)*100);
+    const row = document.createElement('div');
+    row.className = 'rowb';
+    row.innerHTML = `
+      <div class="mono">${cat}</div>
+      <div class="track"><div class="fill" style="width:${p}%;"></div></div>
+      <div class="mono" style="text-align:right">${p}%</div>
+    `;
+    els.meter.appendChild(row);
+
+    if(p<80){ // ใส่คำใบ้เฉพาะหมวดที่ยังไม่แข็ง
+      tips[cat].forEach(t=>{
+        const li=document.createElement('li');
+        li.textContent = `• ${cat}: ${t}`;
+        els.hints.appendChild(li);
+      });
+    }
+  });
+
+  // เกรดเฉลี่ย (เปอร์เซ็นต์รวม) → แปลงเป็นตัวอักษรอีกรอบเพื่อสวยงาม
+  const avgLetter = gradeFromPct(pct);
+  els.avgGrade.textContent = `${avgLetter} (${pct}%)`;
+
+  // แถบความคืบหน้าให้เต็ม
   els.prog.style.width = '100%';
-  show("result");
+
+  show('result');
 }
 
-function restart(){ show("home"); }
-
-function escapeHtml(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-
-/* ========== Events ========== */
-els.btnPlay.addEventListener('click', ()=>show('rules'));
-els.btnRules.addEventListener('click', ()=>show('rules'));
-els.btnCloseRules.addEventListener('click', ()=>show('home'));
-els.btnStart.addEventListener('click', startQuiz);
-els.btnExit.addEventListener('click', ()=>{
-  if(confirm("ออกจากแบบทดสอบและกลับหน้าแรก? ความคืบหน้าจะหายไป")) restart();
-});
-els.btnSubmit.addEventListener('click', submitAnswer);
-els.btnNext.addEventListener('click', nextQuestion);
-els.btnRestart.addEventListener('click', restart);
-
-// ดนตรี
-els.btnMusic.addEventListener('click', async ()=>{
-  if(!isMusicOn){
-    try{
-      await (audioCtx? audioCtx.resume(): Promise.resolve());
-      startMusic();
-      els.btnMusic.textContent = "ดนตรี: เปิด";
-    }catch(e){ alert("เบราว์เซอร์ปฏิเสธการเล่นอัตโนมัติ ให้กดอีกครั้งหลังโต้ตอบกับหน้าเว็บ"); }
-  }else{
-    stopMusic();
-    els.btnMusic.textContent = "ดนตรี: ปิด";
-  }
-});
-
-// กด Enter เพื่อส่งเมื่ออยู่หน้า Quiz
-document.addEventListener('keydown',(e)=>{
-  if(!screens.quiz.hidden && e.key==='Enter'){
-    const tag = document.activeElement?.tagName?.toLowerCase();
-    if(tag!=='button' && tag!=='input' && !els.btnSubmit.disabled) submitAnswer(e);
-  }
-});
+function restart(){ show('home'); }
 </script>
 </body>
 </html>
