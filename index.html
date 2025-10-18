@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>แบบทดสอบโค้ด 40 ข้อ · รวม 100 คะแนน</title>
-<meta name="description" content="Quiz โค้ดไทย Programming/HTML/CSS รวม 40 ข้อ คะแนนรวม 100 สุ่มลำดับใหม่ทุกครั้ง พร้อมคอนเฟตตี้ วิบวับ คำพูดไม่ซ้ำ และสรุปเวลาต่อข้อ">
+<meta name="description" content="Quiz โค้ดไทย Programming/HTML/CSS รวม 40 ข้อ คะแนนรวม 100 สุ่มลำดับใหม่ทุกครั้ง พร้อมคอนเฟตตี้ วิบวับ คำพูดไม่ซ้ำ และใบตัดเกรดสวยๆ">
 <style>
   :root{
     --bg:#0b0b0d; --bg2:#131320; --card:#141418; --muted:#b7bcc4; --text:#e8e9ed;
@@ -32,15 +32,14 @@
   p{margin:0 0 12px; color:var(--muted); line-height:1.7}
   .muted{color:var(--muted)}
   .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-  .btn{
-    appearance:none;border:0;cursor:pointer;padding:12px 18px;border-radius:14px;
+  .btn{appearance:none;border:0;cursor:pointer;padding:12px 18px;border-radius:14px;
     background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#0b0b0d; font-weight:800;
-    box-shadow:0 10px 24px rgba(124,247,230,.2); transition:transform .08s ease, filter .2s ease
-  }
+    box-shadow:0 10px 24px rgba(124,247,230,.2); transition:transform .08s ease, filter .2s ease}
   .btn:hover{transform:translateY(-1px); filter:brightness(1.05)}
   .btn.secondary{background:transparent;color:var(--text);border:1px solid var(--border);box-shadow:none;font-weight:700}
   .btn.ghost{background:transparent;color:var(--muted)}
   .btn[disabled]{opacity:.5;cursor:not-allowed}
+  input[type="text"]{background:#0f0f16;color:var(--text);border:1px solid var(--border);border-radius:12px;padding:10px 12px;min-width:260px}
   .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--border);color:var(--muted);background:rgba(255,255,255,.02)}
   .divider{height:1px;background:linear-gradient(90deg,transparent,#27273a,transparent);margin:18px 0}
   .hero{display:grid; gap:14px; padding:10px 0 4px}
@@ -58,21 +57,34 @@
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
   :focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:10px}
   .badge-cat{background:rgba(124,247,230,.08);border:1px dashed rgba(124,247,230,.35)}
-  .grand{position:relative;overflow:hidden;background:linear-gradient(180deg,#101018,#0b0b0d);
-    border:1px solid #2b2b3e;border-radius:22px;padding:20px;box-shadow:0 10px 50px rgba(146,128,255,.15), inset 0 0 60px rgba(124,247,230,.03)}
-  .grade-badge{display:inline-block;padding:6px 12px;border-radius:12px;background:linear-gradient(135deg,var(--gold),#ff9d6b);color:#1a1200;font-weight:900}
+  /* Certificate */
+  .certificate{
+    position:relative; overflow:hidden;
+    background:linear-gradient(180deg,#101018,#0b0b0d);
+    border:1px solid #2b2b3e; border-radius:22px; padding:20px;
+    box-shadow:0 10px 50px rgba(146,128,255,.15), inset 0 0 60px rgba(124,247,230,.03)
+  }
+  .cert-head{
+    display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap
+  }
+  .grade-badge{display:inline-block;padding:8px 14px;border-radius:14px;background:linear-gradient(135deg,var(--gold),#ff9d6b);color:#1a1200;font-weight:900}
   .meter{display:grid;gap:8px;margin-top:8px}
   .meter .rowb{display:grid;grid-template-columns:120px 1fr 60px;gap:10px;align-items:center}
   .meter .track{height:10px;background:#101018;border:1px solid #2a2a3b;border-radius:999px;overflow:hidden}
   .meter .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--cyan),var(--purple))}
-  .hint{margin-top:8px;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;margin-top:8px}
+  th,td{padding:8px;border-bottom:1px solid #2a2a3b;text-align:left;color:var(--muted)}
+  th{color:var(--text)}
+  .sig{
+    display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px
+  }
+  .sig .box{
+    border:1px dashed #2a2a3b; border-radius:14px; padding:12px; background:rgba(255,255,255,.02)
+  }
   .sparkle{pointer-events:none;position:absolute;inset:0;overflow:hidden}
   .sparkle i{position:absolute;width:6px;height:6px;border-radius:50%;background:radial-gradient(circle,#fff, rgba(255,255,255,.1));
     box-shadow:0 0 8px rgba(255,255,255,.8), 0 0 14px rgba(180,147,255,.6);animation:twinkle 1.6s linear infinite}
   @keyframes twinkle{0%,100%{transform:scale(.6);opacity:.3}50%{transform:scale(1.2);opacity:1}}
-  table{width:100%;border-collapse:collapse;margin-top:8px}
-  th,td{padding:8px;border-bottom:1px solid #2a2a3b;text-align:left;color:var(--muted)}
-  th{color:var(--text)}
 </style>
 </head>
 <body>
@@ -88,7 +100,11 @@
       </div>
       <h1>คุณอยากรู้ชื่อฉันใช่ไหมล่ะรุ่นน้อง</h1>
       <p><strong>ชื่อของฉันก็คือ…. </strong><span class="muted">อุ๊ยสัญญาณหาย 🤯 ไปตอบคำถามเอาแล้วกัน!</span></p>
-      <p>สุ่มลำดับใหม่ทุกครั้ง ตั้งแต่ง่ายไปจนยาก จบแล้วมี “สรุปใหญ่” + “คำใบ้พัฒนา” พร้อมเวลารวมและเวลาแต่ละข้อ</p>
+      <div class="row" style="margin-top:4px">
+        <label for="studentName" class="muted">กรอกชื่อก่อนเริ่ม:</label>
+        <input id="studentName" type="text" placeholder="เช่น: Thanaphon K." autocomplete="name" />
+      </div>
+      <p class="muted" style="margin-top:4px">ระบบจะแสดงชื่อบนใบตัดเกรดตอนจบ</p>
     </div>
     <div class="divider"></div>
     <div class="row">
@@ -105,8 +121,7 @@
       <li><strong>รูปแบบ</strong>: 4 ช้อยส์ คำตอบเดียว</li>
       <li><strong>คะแนน</strong>: ข้อละ 2.5 รวม 100</li>
       <li><strong>สุ่ม</strong>: เริ่มใหม่ทุกครั้ง ลำดับเปลี่ยน</li>
-      <li><strong>ขั้นตอน</strong>: เลือกคำตอบ → “ตอบเลย” → เห็นถูก/ผิด → “ข้อถัดไป”</li>
-      <li><strong>เวลา</strong>: ระบบจะจับเวลารวมและเวลาในแต่ละข้อให้อัตโนมัติ</li>
+      <li><strong>เวลา</strong>: ระบบจับเวลารวมและเวลาแต่ละข้อให้</li>
     </ol>
     <div class="row" style="margin-top:6px">
       <button class="btn" id="btnStart">เริ่มทำแบบทดสอบ</button>
@@ -132,26 +147,21 @@
     </div>
   </section>
 
-  <!-- RESULT -->
+  <!-- RESULT / CERTIFICATE -->
   <section id="result" class="card" hidden>
     <h2 class="center">พิธีประกาศผลอันยิ่งใหญ่</h2>
     <p class="muted center" id="stat">คุณทำแบบทดสอบเสร็จแล้ว</p>
 
-    <div class="grand" id="grand">
-      <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap">
+    <div class="certificate" id="cert">
+      <div class="cert-head">
         <div>
-          <div style="font-size:18px;margin-bottom:4px">คะแนนรวม</div>
-          <div style="font-size:28px;font-weight:900">
-            <span id="scoreFinal" class="mono"></span> / 100
-          </div>
-          <div class="muted">
-            ความแม่นยำ: <span id="pctFinal" class="mono"></span>% ·
-            เวลา(รวม): <span id="timeTotal" class="mono"></span>s
-          </div>
+          <div style="font-size:18px;margin-bottom:6px">แบบทดสอบโค้ด (40 ข้อ)</div>
+          <div><strong>ผู้เข้าสอบ:</strong> <span id="studentDisplay" class="mono"></span></div>
+          <div class="muted">ความแม่นยำ: <span id="pctFinal" class="mono"></span>% · เวลารวม: <span id="timeTotal" class="mono"></span>s</div>
         </div>
         <div>
-          <div style="font-size:18px;margin-bottom:4px">เกรดของคุณ</div>
           <div class="grade-badge" id="gradeBadge">A</div>
+          <div class="muted center">คะแนน <span id="scoreFinal" class="mono"></span> / 100</div>
         </div>
       </div>
 
@@ -167,17 +177,17 @@
 
       <div class="divider"></div>
 
-      <h3 style="margin:0 0 8px">คำใบ้ของฉัน</h3>
-      <pre class="mono" id="finalHint" style="white-space:pre-wrap"></pre>
-
-      <div id="revealBlock" style="margin-top:12px;display:none">
-        <div class="divider"></div>
-        <h3 style="margin:8px 0">คุณเก่งมาก และแล้วก็แนะนำตัวของฉัน</h3>
-<pre class="mono" style="white-space:pre-wrap">
-My name is NAME SAYSAMONE
-CLASS: 2CW2
-NAMBER :1111101011110110110011110111000
-</pre>
+      <div class="sig">
+        <div class="box">
+          <div><strong>ผู้ทำแบบทดสอบ (Candidate)</strong></div>
+          <div class="muted">ชื่อ: <span id="studentSign" class="mono"></span></div>
+        </div>
+        <div class="box" id="seniorBox" style="display:none">
+          <div><strong>ผู้รับรองจากรุ่นพี่ (Certified by Senior)</strong></div>
+          <div class="muted mono">MR SAYSAMONE</div>
+          <div class="muted mono">CLASS 2CW2</div>
+          <div class="muted mono">NUMBER 020 95399384</div>
+        </div>
       </div>
 
       <div class="sparkle" id="sparkle"></div>
@@ -193,12 +203,12 @@ NAMBER :1111101011110110110011110111000
 <canvas id="confetti" style="position:fixed;inset:0;pointer-events:none;z-index:9999;display:none;"></canvas>
 
 <script>
-(()=>{ // IIFE ป้องกันตัวแปรซ้ำ
+(()=>{ // IIFE
 /* ===== Utils ===== */
 const $ = id => document.getElementById(id);
 const shuffle = a => { for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; };
 const escapeHtml = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-const fmt1 = x => (Math.round(x*10)/10).toString().replace(/\.0$/,''); // 1 ทศนิยม
+const fmt1 = x => (Math.round(x*10)/10).toString().replace(/\.0$/,'');
 
 /* ===== Questions (40) ===== */
 const PROG = [
@@ -208,7 +218,7 @@ const PROG = [
   {cat:'Programming', q:'CLI ย่อมาจากอะไร?', o:['Command Line Interface','Computer Logic Input','Code Link Interop','Central Logic Interface'], a:0},
   {cat:'Programming', q:'IPv4 ปกติมีรูปแบบใด?', o:['ตัวอักษร 8 ตัว','เลขฐานสิบ 4 ชุดคั่นด้วยจุด','เลขฐานสิบหก 6 ชุด','ตัวเลขสุ่ม'], a:1},
   {cat:'Programming', q:'Git “commit” คือ?', o:['ลบไฟล์ทั้งหมด','จดบันทึกสถานะการเปลี่ยนแปลง','อัปโหลดไปเซิร์ฟเวอร์เสมอ','รีเซ็ตโปรเจ็กต์'], a:1},
-  {cat:'Programming', q:'SQL คำสั่งเลือกข้อมูลพื้นฐานคือ?', o:['FIND','GET','SELECT','CHOOSE'], a:2},
+  {cat:'Programming', q:'SQL คำสั่งพื้นฐานเพื่อเลือกข้อมูลคือ?', o:['FIND','GET','SELECT','CHOOSE'], a:2},
   {cat:'Programming', q:'ตัวดำเนินการลอจิกที่ถูกต้องคือ?', o:['true AND false = true','true OR false = true','false OR false = true','true AND true = false'], a:1},
   {cat:'Programming', q:'RAM ต่างจาก SSD อย่างไร?', o:['RAM เก็บถาวร','SSD เร็วกว่า RAM เสมอ','RAM ไว/ชั่วคราว, SSD ถาวร/ช้ากว่า','เหมือนกัน'], a:2},
   {cat:'Programming', q:'ภาษาที่รันบนเบราว์เซอร์โดยตรงทั่วไปคือ?', o:['C++','JavaScript','Python','Java'], a:1},
@@ -254,22 +264,23 @@ const TOTAL = 40, POINT_PER = 2.5, MAX_SCORE = TOTAL*POINT_PER;
 const CAT_TARGET = { Programming:10, HTML:15, CSS:15 };
 const screens = {home:$("home"), rules:$("rules"), quiz:$("quiz"), result:$("result")};
 const els = {
+  studentName:$("studentName"), studentDisplay:$("studentDisplay"), studentSign:$("studentSign"),
   btnPlay:$("btnPlay"), btnRules:$("btnRules"), btnStart:$("btnStart"), btnCloseRules:$("btnCloseRules"),
   btnExit:$("btnExit"), btnSubmit:$("btnSubmit"), btnNext:$("btnNext"), btnRestart:$("btnRestart"),
   pillCat:$("pillCat"), pillNo:$("pillNo"), pillScore:$("pillScore"), prog:$("prog"),
   qtext:$("qtext"), qform:$("qform"), feedback:$("feedback"),
   stat:$("stat"), scoreFinal:$("scoreFinal"), pctFinal:$("pctFinal"), timeTotal:$("timeTotal"),
   gradeBadge:$("gradeBadge"), meter:$("meter"), perQWrap:$("perQWrap"),
-  finalHint:$("finalHint"), revealBlock:$("revealBlock"), sparkle:$("sparkle")
+  seniorBox:$("seniorBox"), sparkle:$("sparkle")
 };
 let state = {
   order:[], i:0, score:0, selected:null, answered:false,
   startTime:0, perCat:{Programming:0, HTML:0, CSS:0},
-  qStart:0, perQ:[] // {no, cat, sec}
+  qStart:0, perQ:[], student:''
 };
 
-/* ===== Fun lines (no-repeat bags) ===== */
-function makeBag(src){ let bag=[]; return ()=>{ if(!bag.length) bag=shuffle(src.slice()); return bag.pop(); } }
+/* ===== Fun lines (no-repeat) ===== */
+const makeBag = src => { let bag=[]; return ()=>{ if(!bag.length) bag=shuffle(src.slice()); return bag.pop(); } };
 const LINES_OK = [
   "เอ้า! เฉียบเวอร์ ใครสอนมาเนี่ย 🔥","โหดชะมัด ใกล้จะแซงรุ่นพี่แล้วนะ 😎",
   "ถูกแบบไม่เผื่อคู่แข่ง เกินไปมั้ย! 💥","สมองไวแบบ SSD NVMe! ✨",
@@ -323,7 +334,12 @@ function show(name){ for(const k in screens) screens[k].hidden=(k!==name); }
 $("btnPlay").addEventListener('click',()=>show('rules'));
 $("btnRules").addEventListener('click',()=>show('rules'));
 $("btnCloseRules").addEventListener('click',()=>show('home'));
-$("btnStart").addEventListener('click',startQuiz);
+$("btnStart").addEventListener('click',()=>{
+  const n = els.studentName.value.trim();
+  if(!n){ alert("กรุณากรอกชื่อก่อนเริ่มทำแบบทดสอบ"); return; }
+  state.student = n;
+  startQuiz();
+});
 $("btnExit").addEventListener('click',()=>{ if(confirm('ออกจากแบบทดสอบและกลับหน้าแรก? ความคืบหน้าจะหายไป')) restart(); });
 $("btnSubmit").addEventListener('click',submitAnswer);
 $("btnNext").addEventListener('click',nextQuestion);
@@ -340,7 +356,7 @@ function startQuiz(){
   state.order = shuffle([...Array(BANK.length).keys()]);
   state.i=0; state.score=0; state.selected=null; state.answered=false;
   state.startTime=performance.now(); state.perCat={Programming:0,HTML:0,CSS:0}; state.perQ=[];
-  renderQuestion(); show('quiz');
+  show('quiz'); renderQuestion();
 }
 function renderQuestion(){
   const qi=state.order[state.i], item=BANK[qi];
@@ -366,10 +382,10 @@ function submitAnswer(e){
   e.preventDefault(); if(state.selected===null || state.answered) return;
   const qi=state.order[state.i], item=BANK[qi]; const correct=(state.selected===item.a);
   state.answered=true;
-  const dt = (performance.now()-state.qStart)/1000; // วินาที
+  const dt = (performance.now()-state.qStart)/1000; // sec
   state.perQ.push({ no: state.i+1, cat: item.cat, sec: dt });
 
-  if(correct){ state.score+=POINT_PER; state.perCat[item.cat]+=1; els.feedback.textContent=nextOK(); els.feedback.className='feedback ok'; burstConfetti({count:90,y:0.18}); }
+  if(correct){ state.score+=2.5; state.perCat[item.cat]+=1; els.feedback.textContent=nextOK(); els.feedback.className='feedback ok'; burstConfetti({count:90,y:0.18}); }
   else{ els.feedback.textContent=nextERR(); els.feedback.className='feedback err'; }
 
   els.qform.querySelectorAll('input[type="radio"]').forEach((inp,idx)=>{
@@ -378,25 +394,34 @@ function submitAnswer(e){
     if(idx===state.selected && !correct) box.style.borderColor='rgba(255,95,114,.95)';
   });
   els.btnSubmit.disabled=true; els.btnNext.hidden=false;
-  els.pillScore.textContent=`คะแนน ${fmt1(state.score)}/${MAX_SCORE}`;
+  els.pillScore.textContent=`คะแนน ${fmt1(state.score)}/100`;
 }
 function nextQuestion(){ if(!state.answered) return; state.i++; if(state.i>=TOTAL) showResult(); else{ state.selected=null; state.answered=false; renderQuestion(); } }
 
 /* ===== Result ===== */
 function gradeFromPct(p){ if(p>=90) return 'A'; if(p>=80) return 'B'; if(p>=70) return 'C'; if(p>=60) return 'D'; return 'F'; }
+function perQTable(items){
+  let rows = `<table aria-label="เวลาแต่ละข้อ"><thead><tr><th>ข้อ</th><th>หมวด</th><th>เวลา (วินาที)</th></tr></thead><tbody>`;
+  items.forEach(it=>{ rows += `<tr><td>${it.no}</td><td>${it.cat}</td><td>${fmt1(it.sec)}</td></tr>`; });
+  rows += `</tbody></table>`;
+  return rows;
+}
 function showResult(){
   const elapsed = (performance.now()-state.startTime)/1000;
-  const pct = Math.round(state.score/MAX_SCORE*100);
+  const pct = Math.round(state.score/100*100);
   const grade = gradeFromPct(pct);
 
-  els.stat.textContent=`ทำครบ ${TOTAL} ข้อแล้ว`;
-  els.scoreFinal.textContent=fmt1(state.score);
-  els.pctFinal.textContent=pct.toString();
-  els.timeTotal.textContent=fmt1(elapsed);
-  els.gradeBadge.textContent=`${grade} (${pct}%)`;
+  $("stat").textContent=`ทำครบ ${TOTAL} ข้อแล้ว`;
+  $("scoreFinal").textContent=fmt1(state.score);
+  $("pctFinal").textContent=pct.toString();
+  $("timeTotal").textContent=fmt1(elapsed);
+  $("gradeBadge").textContent=`${grade} (${pct}%)`;
+
+  $("studentDisplay").textContent = state.student || "-";
+  $("studentSign").textContent    = state.student || "-";
 
   // ด้านไหนเก่ง
-  els.meter.innerHTML='';
+  $("meter").innerHTML = '';
   ['Programming','HTML','CSS'].forEach(cat=>{
     const correct = state.perCat[cat], total = CAT_TARGET[cat];
     const p = Math.round((correct/total)*100);
@@ -404,32 +429,21 @@ function showResult(){
     row.innerHTML=`<div class="mono">${cat}</div>
       <div class="track"><div class="fill" style="width:${p}%;"></div></div>
       <div class="mono" style="text-align:right">${p}%</div>`;
-    els.meter.appendChild(row);
+    $("meter").appendChild(row);
   });
 
   // เวลาแต่ละข้อ
-  els.perQWrap.innerHTML = perQTable(state.perQ);
+  $("perQWrap").innerHTML = perQTable(state.perQ);
 
-  // คำใบ้ (คงไว้ตามที่กำหนด)
-  els.finalHint.textContent =
-`( Change 53 41 59 53 41 4D 4F 4E 45 to letters and change IECI ICHD to numbers )
-//class:2CW2`;
-
-  // เผยตัวตนตามสัญญาเมื่อ ≥ B
-  els.revealBlock.style.display = (grade==='A' || grade==='B') ? 'block' : 'none';
+  // แสดงบล็อกรุ่นพี่เฉพาะ ≥ B
+  $("seniorBox").style.display = (grade==='A' || grade==='B') ? 'block' : 'none';
 
   // เอฟเฟกต์
   burstConfetti({count:180,y:0.25});
-  spawnSparkles(els.sparkle, 34);
+  spawnSparkles($("sparkle"), 34);
 
-  els.prog.style.width='100%';
+  $("prog").style.width='100%';
   show('result');
-}
-function perQTable(items){
-  let rows = `<table aria-label="เวลาแต่ละข้อ"><thead><tr><th>ข้อ</th><th>หมวด</th><th>เวลา (วินาที)</th></tr></thead><tbody>`;
-  items.forEach(it=>{ rows += `<tr><td>${it.no}</td><td>${it.cat}</td><td>${fmt1(it.sec)}</td></tr>`; });
-  rows += `</tbody></table>`;
-  return rows;
 }
 function restart(){ show('home'); }
 })(); // end IIFE
