@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>แบบทดสอบโค้ด 40 ข้อ · สุ่มทุกครั้ง · รวม 100 คะแนน</title>
-<meta name="description" content="Quiz โค้ดภาษาไทย 3 หมวด: Programming, HTML, CSS รวม 40 ข้อ คะแนนรวม 100 สุ่มลำดับใหม่ทุกครั้ง พร้อมกติกาและวิธีการเล่น และสรุปผลแบบยิ่งใหญ่">
+<title>แบบทดสอบโค้ด 40 ข้อ · รวม 100 คะแนน</title>
+<meta name="description" content="Quiz โค้ดไทย Programming/HTML/CSS รวม 40 ข้อ คะแนนรวม 100 สุ่มลำดับใหม่ทุกครั้ง พร้อมคอนเฟตตี้ วิบวับ คำพูดไม่ซ้ำ และสรุปเวลาต่อข้อ">
 <style>
   :root{
     --bg:#0b0b0d; --bg2:#131320; --card:#141418; --muted:#b7bcc4; --text:#e8e9ed;
@@ -19,7 +19,7 @@
       radial-gradient(1200px 800px at 80% -10%, var(--bg2) 20%, transparent 60%),
       radial-gradient(900px 600px at -10% 110%, #11111a 20%, transparent 60%),
       var(--bg);
-    color:var(--text); letter-spacing:.2px;
+    color:var(--text);
   }
   .wrap{max-width:1000px;margin:0 auto;padding:24px}
   .card{
@@ -27,7 +27,7 @@
     border:1px solid var(--border); border-radius:22px; padding:28px;
     box-shadow:0 12px 48px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.02)
   }
-  h1{margin:0 0 8px; font-size:clamp(28px,4vw,48px); letter-spacing:.6px}
+  h1{margin:0 0 8px; font-size:clamp(28px,4vw,48px)}
   h2{margin:0 0 8px; font-size:clamp(20px,3vw,28px)}
   p{margin:0 0 12px; color:var(--muted); line-height:1.7}
   .muted{color:var(--muted)}
@@ -51,40 +51,33 @@
   .choice input{margin-top:3px}
   .bar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:10px 0 18px;color:var(--muted)}
   .progress{position:relative;flex:1;height:10px;border-radius:999px;background:var(--bar);border:1px solid var(--border);overflow:hidden}
-  .progress>span{position:absolute;inset:0 0 0 0;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .35s ease}
+  .progress>span{position:absolute;inset:0;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .35s ease}
   .feedback{margin-top:8px;font-weight:800}
   .ok{color:var(--ok)} .err{color:var(--err)}
   .center{text-align:center}
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
   :focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:10px}
-  details summary{cursor:pointer}
   .badge-cat{background:rgba(124,247,230,.08);border:1px dashed rgba(124,247,230,.35)}
-  /* Result “ยิ่งใหญ่” */
-  .grand{
-    background:linear-gradient(180deg,#101018, #0b0b0d);
-    border:1px solid #2b2b3e;border-radius:22px;padding:20px 20px 10px;
-    box-shadow:0 10px 50px rgba(146,128,255,.15), inset 0 0 60px rgba(124,247,230,.03)
-  }
-  .grade-badge{
-    display:inline-block; padding:6px 12px; border-radius:12px;
-    background:linear-gradient(135deg,var(--gold),#ff9d6b); color:#1a1200; font-weight:900
-  }
-  .meter{display:grid; gap:8px; margin-top:8px}
-  .meter .rowb{display:grid; grid-template-columns:120px 1fr 60px; gap:10px; align-items:center}
-  .meter .track{height:10px; background:#101018; border:1px solid #2a2a3b; border-radius:999px; overflow:hidden}
-  .meter .fill{height:100%; width:0%; background:linear-gradient(90deg,var(--cyan),var(--purple))}
-  .hint{margin-top:8px; color:var(--muted)}
-  .hero-title{
-    font-size:clamp(22px,3.2vw,34px); font-weight:900;
-    background:linear-gradient(90deg,#fff,#b9f8ff 40%,#cbb6ff);
-    -webkit-background-clip:text; background-clip:text; color:transparent
-  }
+  .grand{position:relative;overflow:hidden;background:linear-gradient(180deg,#101018,#0b0b0d);
+    border:1px solid #2b2b3e;border-radius:22px;padding:20px;box-shadow:0 10px 50px rgba(146,128,255,.15), inset 0 0 60px rgba(124,247,230,.03)}
+  .grade-badge{display:inline-block;padding:6px 12px;border-radius:12px;background:linear-gradient(135deg,var(--gold),#ff9d6b);color:#1a1200;font-weight:900}
+  .meter{display:grid;gap:8px;margin-top:8px}
+  .meter .rowb{display:grid;grid-template-columns:120px 1fr 60px;gap:10px;align-items:center}
+  .meter .track{height:10px;background:#101018;border:1px solid #2a2a3b;border-radius:999px;overflow:hidden}
+  .meter .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--cyan),var(--purple))}
+  .hint{margin-top:8px;color:var(--muted)}
+  .sparkle{pointer-events:none;position:absolute;inset:0;overflow:hidden}
+  .sparkle i{position:absolute;width:6px;height:6px;border-radius:50%;background:radial-gradient(circle,#fff, rgba(255,255,255,.1));
+    box-shadow:0 0 8px rgba(255,255,255,.8), 0 0 14px rgba(180,147,255,.6);animation:twinkle 1.6s linear infinite}
+  @keyframes twinkle{0%,100%{transform:scale(.6);opacity:.3}50%{transform:scale(1.2);opacity:1}}
+  table{width:100%;border-collapse:collapse;margin-top:8px}
+  th,td{padding:8px;border-bottom:1px solid #2a2a3b;text-align:left;color:var(--muted)}
+  th{color:var(--text)}
 </style>
 </head>
 <body>
 <div class="wrap">
-
-  <!-- LANDING -->
+  <!-- HOME -->
   <section id="home" class="card" role="region" aria-label="หน้าแรก">
     <div class="hero">
       <div class="hero-badges">
@@ -93,13 +86,11 @@
         <span class="pill badge-cat">CSS · 15</span>
         <span class="pill">รวม 40 ข้อ · คะแนนรวม 100</span>
       </div>
-      <h1 class="hero-title">คุณอยากรู้ชื่อฉันใช่ไหมล่ะรุ่นน้อง</h1>
+      <h1>คุณอยากรู้ชื่อฉันใช่ไหมล่ะรุ่นน้อง</h1>
       <p><strong>ชื่อของฉันก็คือ…. </strong><span class="muted">อุ๊ยสัญญาณหาย 🤯 ไปตอบคำถามเอาแล้วกัน!</span></p>
-      <p>แบบทดสอบนี้สุ่มลำดับใหม่ทุกครั้ง ตั้งแต่ง่ายไปจนยาก จบแล้วจะมีสรุปใหญ่บอก “คุณเก่งด้านไหน” และ “เกรดเฉลี่ยเท่าไหร่”</p>
+      <p>สุ่มลำดับใหม่ทุกครั้ง ตั้งแต่ง่ายไปจนยาก จบแล้วมี “สรุปใหญ่” + “คำใบ้พัฒนา” พร้อมเวลารวมและเวลาแต่ละข้อ</p>
     </div>
-
     <div class="divider"></div>
-
     <div class="row">
       <button class="btn" id="btnPlay">เริ่มทำแบบทดสอบ</button>
       <button class="btn secondary" id="btnRules">กติกา & วิธีการเล่น</button>
@@ -110,13 +101,12 @@
   <section id="rules" class="card" role="dialog" aria-modal="true" hidden>
     <h2>กติกา & วิธีการเล่น</h2>
     <ol class="muted" style="margin-left:20px">
-      <li><strong>เนื้อหา</strong>: 3 หมวด — Programming (10), HTML (15), CSS (15) รวม 40 ข้อ</li>
-      <li><strong>รูปแบบ</strong>: คำถาม 4 ช้อยส์ เลือกคำตอบเดียว</li>
-      <li><strong>คะแนน</strong>: ข้อละ <strong>2.5 คะแนน</strong> รวม <strong>100 คะแนน</strong></li>
-      <li><strong>สุ่ม</strong>: เริ่มใหม่ทุกครั้ง ลำดับคำถามจะเปลี่ยน</li>
-      <li><strong>ขั้นตอน</strong>: เลือกคำตอบ → กด “ตอบเลย” → เห็นผลถูก/ผิด → กด “ข้อถัดไป”</li>
-      <li><strong>ออกกลางคัน</strong>: “ออกไปหน้าแรก” (ความคืบหน้าจะหายไป)</li>
-      <li><strong>จบการทดสอบ</strong>: มีสรุปใหญ่พร้อมเกรด, เปอร์เซ็นต์, จุดแข็งรายหมวด, คำใบ้พัฒนา</li>
+      <li><strong>เนื้อหา</strong>: Programming (10), HTML (15), CSS (15) รวม 40 ข้อ</li>
+      <li><strong>รูปแบบ</strong>: 4 ช้อยส์ คำตอบเดียว</li>
+      <li><strong>คะแนน</strong>: ข้อละ 2.5 รวม 100</li>
+      <li><strong>สุ่ม</strong>: เริ่มใหม่ทุกครั้ง ลำดับเปลี่ยน</li>
+      <li><strong>ขั้นตอน</strong>: เลือกคำตอบ → “ตอบเลย” → เห็นถูก/ผิด → “ข้อถัดไป”</li>
+      <li><strong>เวลา</strong>: ระบบจะจับเวลารวมและเวลาในแต่ละข้อให้อัตโนมัติ</li>
     </ol>
     <div class="row" style="margin-top:6px">
       <button class="btn" id="btnStart">เริ่มทำแบบทดสอบ</button>
@@ -132,11 +122,9 @@
       <div class="progress" aria-label="ความคืบหน้า"><span id="prog"></span></div>
       <span class="pill" id="pillScore">คะแนน 0/100</span>
     </div>
-
-    <div id="qtext" style="font-weight:800;font-size:18px;margin-bottom:8px">ข้อความคำถาม</div>
+    <div id="qtext" style="font-weight:800;font-size:18px;margin-bottom:8px">คำถาม</div>
     <form id="qform" class="choices" aria-labelledby="qtext"></form>
     <div id="feedback" class="feedback" aria-live="polite"></div>
-
     <div class="row" style="margin-top:8px">
       <button class="btn" id="btnSubmit" disabled>ตอบเลย</button>
       <button class="btn secondary" id="btnNext" hidden>ข้อถัดไป</button>
@@ -144,17 +132,22 @@
     </div>
   </section>
 
-  <!-- RESULT (GRAND) -->
+  <!-- RESULT -->
   <section id="result" class="card" hidden>
     <h2 class="center">พิธีประกาศผลอันยิ่งใหญ่</h2>
     <p class="muted center" id="stat">คุณทำแบบทดสอบเสร็จแล้ว</p>
 
-    <div class="grand" style="margin-top:10px">
+    <div class="grand" id="grand">
       <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap">
         <div>
           <div style="font-size:18px;margin-bottom:4px">คะแนนรวม</div>
-          <div style="font-size:28px;font-weight:900"><span id="scoreFinal" class="mono"></span> / 100</div>
-          <div class="muted">ความแม่นยำ: <span id="pctFinal" class="mono"></span>% · เวลา: <span id="timeFinal" class="mono"></span>s</div>
+          <div style="font-size:28px;font-weight:900">
+            <span id="scoreFinal" class="mono"></span> / 100
+          </div>
+          <div class="muted">
+            ความแม่นยำ: <span id="pctFinal" class="mono"></span>% ·
+            เวลา(รวม): <span id="timeTotal" class="mono"></span>s
+          </div>
         </div>
         <div>
           <div style="font-size:18px;margin-bottom:4px">เกรดของคุณ</div>
@@ -165,35 +158,49 @@
       <div class="divider"></div>
 
       <h3 style="margin:0 0 8px">คุณเก่งด้านไหน</h3>
-      <div class="meter" id="meter">
-        <!-- rows injected: (หมวด) bar percent -->
-      </div>
+      <div class="meter" id="meter"></div>
 
       <div class="divider"></div>
 
-      <h3 style="margin:0 0 8px">เกรดเฉลี่ย & คำใบ้</h3>
-      <p class="muted">เกรดเฉลี่ย (คิดจากเปอร์เซ็นต์รวม): <strong><span id="avgGrade" class="mono"></span></strong></p>
-      <ul id="hints" class="hint">
-        <!-- dynamic hints -->
-      </ul>
+      <h3 style="margin:0 0 8px">เวลาแต่ละข้อ</h3>
+      <div id="perQWrap"></div>
+
+      <div class="divider"></div>
+
+      <h3 style="margin:0 0 8px">คำใบ้ของฉัน</h3>
+      <pre class="mono" id="finalHint" style="white-space:pre-wrap"></pre>
+
+      <div id="revealBlock" style="margin-top:12px;display:none">
+        <div class="divider"></div>
+        <h3 style="margin:8px 0">คุณเก่งมาก และแล้วก็แนะนำตัวของฉัน</h3>
+<pre class="mono" style="white-space:pre-wrap">
+My name is NAME SAYSAMONE
+CLASS: 2CW2
+NAMBER :1111101011110110110011110111000
+</pre>
+      </div>
+
+      <div class="sparkle" id="sparkle"></div>
     </div>
 
     <div class="row center" style="justify-content:center;margin-top:12px">
       <button class="btn" id="btnRestart">เริ่มใหม่</button>
     </div>
   </section>
-
 </div>
 
-<script>
-/* ===== Utilities ===== */
-const $ = (id)=>document.getElementById(id);
-function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
-function escapeHtml(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-function fmtScore(x){ return (Math.round(x*10)/10).toString().replace(/\.0$/,''); }
+<!-- Confetti canvas -->
+<canvas id="confetti" style="position:fixed;inset:0;pointer-events:none;z-index:9999;display:none;"></canvas>
 
-/* ===== Question Banks (40) ===== */
-/** type: {cat:'Programming'|'HTML'|'CSS', q:string, o:string[4], a:number} */
+<script>
+(()=>{ // IIFE ป้องกันตัวแปรซ้ำ
+/* ===== Utils ===== */
+const $ = id => document.getElementById(id);
+const shuffle = a => { for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; };
+const escapeHtml = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const fmt1 = x => (Math.round(x*10)/10).toString().replace(/\.0$/,''); // 1 ทศนิยม
+
+/* ===== Questions (40) ===== */
 const PROG = [
   {cat:'Programming', q:'บิต (bit) และ ไบต์ (byte) ต่างกันอย่างไร?', o:['1 บิต = 8 ไบต์','1 ไบต์ = 8 บิต','เท่ากัน','ไม่เกี่ยวกัน'], a:1},
   {cat:'Programming', q:'เวลาเฉลี่ยของ Binary Search คือ?', o:['O(n)','O(log n)','O(n log n)','O(1)'], a:1},
@@ -202,244 +209,230 @@ const PROG = [
   {cat:'Programming', q:'IPv4 ปกติมีรูปแบบใด?', o:['ตัวอักษร 8 ตัว','เลขฐานสิบ 4 ชุดคั่นด้วยจุด','เลขฐานสิบหก 6 ชุด','ตัวเลขสุ่ม'], a:1},
   {cat:'Programming', q:'Git “commit” คือ?', o:['ลบไฟล์ทั้งหมด','จดบันทึกสถานะการเปลี่ยนแปลง','อัปโหลดไปเซิร์ฟเวอร์เสมอ','รีเซ็ตโปรเจ็กต์'], a:1},
   {cat:'Programming', q:'SQL คำสั่งเลือกข้อมูลพื้นฐานคือ?', o:['FIND','GET','SELECT','CHOOSE'], a:2},
-  {cat:'Programming', q:'ตัวดำเนินการลอจิก AND/OR ข้อใดถูก?', o:['true AND false = true','true OR false = true','false OR false = true','true AND true = false'], a:1},
+  {cat:'Programming', q:'ตัวดำเนินการลอจิกที่ถูกต้องคือ?', o:['true AND false = true','true OR false = true','false OR false = true','true AND true = false'], a:1},
   {cat:'Programming', q:'RAM ต่างจาก SSD อย่างไร?', o:['RAM เก็บถาวร','SSD เร็วกว่า RAM เสมอ','RAM ไว/ชั่วคราว, SSD ถาวร/ช้ากว่า','เหมือนกัน'], a:2},
   {cat:'Programming', q:'ภาษาที่รันบนเบราว์เซอร์โดยตรงทั่วไปคือ?', o:['C++','JavaScript','Python','Java'], a:1},
 ];
-
 const HTMLQ = [
   {cat:'HTML', q:'แท็กหัวเรื่องหลักของหน้า?', o:['<title>','<h1>','<head>','<header>'], a:1},
   {cat:'HTML', q:'แอตทริบิวต์แหล่งรูปภาพของ <img> คือ?', o:['href','src','alt','data'], a:1},
   {cat:'HTML', q:'ลิงก์ไปหน้าอื่นใช้แท็กใด?', o:['<a>','<link>','<nav>','<route>'], a:0},
-  {cat:'HTML', q:'แท็กเชิงความหมายสำหรับเนื้อหาบทความอิสระ?', o:['<div>','<section>','<article>','<span>'], a:2},
-  {cat:'HTML', q:'ส่งฟอร์มโดยไม่รีเฟรชหน้า ควรใช้?', o:['method="GET" เท่านั้น','method="POST" เท่านั้น','JavaScript จัดการ submit','แท็บใหม่'], a:2},
-  {cat:'HTML', q:'อินพุตที่ตรวจอีเมลพื้นฐานคือ type ใด?', o:['text','email','url','search'], a:1},
-  {cat:'HTML', q:'การเชื่อม <label> กับอินพุตใช้แอตทริบิวต์?', o:['name','for','id','value'], a:1},
-  {cat:'HTML', q:'คุณสมบัติ alt ของ <img> ใช้เพื่อ?', o:['ตกแต่ง','SEO เท่านั้น','คำอธิบายเมื่อรูปโหลดไม่ได้/ช่วยการเข้าถึง','ไม่จำเป็น'], a:2},
-  {cat:'HTML', q:'ปรับสเกลบนมือถือควรใช้ meta ใด?', o:['theme-color','charset','viewport','refresh'], a:2},
-  {cat:'HTML', q:'แท็กสำหรับรายการเรียงลำดับคือ?', o:['<ul>','<ol>','<li>','<dl>'], a:1},
+  {cat:'HTML', q:'แท็กเชิงความหมายสำหรับบทความอิสระ?', o:['<div>','<section>','<article>','<span>'], a:2},
+  {cat:'HTML', q:'ส่งฟอร์มโดยไม่รีเฟรชหน้า ควรใช้?', o:['GET เท่านั้น','POST เท่านั้น','JavaScript จัดการ submit','เปิดแท็บใหม่'], a:2},
+  {cat:'HTML', q:'input type ใดตรวจอีเมลพื้นฐาน?', o:['text','email','url','search'], a:1},
+  {cat:'HTML', q:'เชื่อม <label> กับ input ใช้แอตทริบิวต์?', o:['name','for','id','value'], a:1},
+  {cat:'HTML', q:'alt ของ <img> ใช้เพื่อ?', o:['ตกแต่ง','SEO เท่านั้น','คำอธิบาย/การเข้าถึง','ไม่จำเป็น'], a:2},
+  {cat:'HTML', q:'มือถือควรมี meta อะไร?', o:['theme-color','charset','viewport','refresh'], a:2},
+  {cat:'HTML', q:'รายการเรียงลำดับใช้แท็ก?', o:['<ul>','<ol>','<li>','<dl>'], a:1},
   {cat:'HTML', q:'ส่วนหัวของตารางคือ?', o:['<thead>','<tfoot>','<tbody>','<caption>'], a:0},
-  {cat:'HTML', q:'ค่า type ปริยายของ <button> ในฟอร์มมักเป็น?', o:['button','submit','reset','menu'], a:1},
-  {cat:'HTML', q:'ใส่สคริปต์แบบโหลดหลังพาร์สใช้?', o:['defer','async','module','nomodule'], a:0},
-  {cat:'HTML', q:'องค์ประกอบใดเป็น inline?', o:['<div>','<span>','<section>','<article>'], a:1},
-  {cat:'HTML', q:'แอตทริบิวต์ใดช่วยผู้อ่านจอ (accessibility)?', o:['data-*','aria-label','tabindex="-1"','draggable'], a:1},
+  {cat:'HTML', q:'ค่า type ปริยายของ <button> ในฟอร์มคือ?', o:['button','submit','reset','menu'], a:1},
+  {cat:'HTML', q:'สคริปต์โหลดหลังพาร์สใช้?', o:['defer','async','module','nomodule'], a:0},
+  {cat:'HTML', q:'inline element คือ?', o:['<div>','<span>','<section>','<article>'], a:1},
+  {cat:'HTML', q:'ช่วยผู้อ่านจอควรใช้แอตทริบิวต์?', o:['data-*','aria-label','tabindex="-1"','draggable'], a:1},
 ];
-
 const CSSQ = [
   {cat:'CSS', q:'เปลี่ยนสีอักษรใช้ property ใด?', o:['font-style','color','text-decoration','fill'], a:1},
-  {cat:'CSS', q:'เลือกองค์ประกอบด้วยคลาสใช้?', o:['#name','.name','name','*name'], a:1},
-  {cat:'CSS', q:'Specificity สูงสุดคือ?', o:['องค์ประกอบ','คลาส','ไอดี','ตัวเลือก *'], a:2},
-  {cat:'CSS', q:'กล่องโมเดล (box model) ไม่รวมอะไรใน content-box?', o:['content','padding','border','margin'], a:3},
-  {cat:'CSS', q:'จัดกึ่งกลางทั้งแนวนอน/ตั้งใน Flex ใช้?', o:['text-align:center','align-content:center','justify-content:center; align-items:center;','place-content: center only'], a:2},
+  {cat:'CSS', q:'เลือกด้วยคลาสใช้?', o:['#name','.name','name','*name'], a:1},
+  {cat:'CSS', q:'Specificity สูงสุดคือ?', o:['องค์ประกอบ','คลาส','ไอดี','*'], a:2},
+  {cat:'CSS', q:'content-box ไม่รวมอะไร?', o:['content','padding','border','margin'], a:3},
+  {cat:'CSS', q:'กึ่งกลางทั้งสองแกนใน Flex ใช้?', o:['text-align:center','align-content:center','justify-content:center; align-items:center;','place-content:center only'], a:2},
   {cat:'CSS', q:'Grid 3 คอลัมน์เท่ากัน?', o:['grid-columns:3','grid:3x1fr','grid-template-columns: repeat(3,1fr);','columns:3fr'], a:2},
-  {cat:'CSS', q:'Media query พื้นฐานสำหรับกว้าง ≥ 768px?', o:['@media (min-width:768px)','@media (width>=768)','@media screen 768','@mq 768 up'], a:0},
-  {cat:'CSS', q:'position: sticky จะติดกับ?', o:['viewport เสมอ','บรรพบุรุษที่เลื่อนスク롤ได้','<html>','<body>'], a:1},
-  {cat:'CSS', q:'z-index ทำงานเมื่อองค์ประกอบ…', o:['มี position ที่ไม่ใช่ static','เป็น block เท่านั้น','เป็น flex เท่านั้น','อยู่บน body เท่านั้น'], a:0},
-  {cat:'CSS', q:'ซ่อนและกันพื้นที่ต่างกันคือ?', o:['display:none ซ่อนและกันพื้นที่','visibility:hidden ซ่อนและกันพื้นที่','display:none ซ่อนและไม่กันพื้นที่','ทั้งคู่กันพื้นที่'], a:2},
-  {cat:'CSS', q:':hover และ :focus คือ?', o:['pseudo-element','pseudo-class','attribute selector','ไม่เกี่ยว'], a:1},
-  {cat:'CSS', q:'เลือกแถวที่ 2 ในรายการใช้?', o:[':nth-child(2)',':nth-of-type(2)',':first-child(2)',':row(2)'], a:0},
-  {cat:'CSS', q:'box-sizing:border-box มีผลว่า?', o:['width รวม padding/border','width ไม่รวม padding/border','ไม่เกี่ยวกับ width','ลบ margin อัตโนมัติ'], a:0},
-  {cat:'CSS', q:'ตัวแปร CSS ประกาศแบบใด?', o:['$brand: #fff','--brand: #fff','var-brand: #fff','@brand: #fff'], a:1},
+  {cat:'CSS', q:'MQ กว้าง ≥ 768px?', o:['@media (min-width:768px)','@media (width>=768)','@media screen 768','@mq 768 up'], a:0},
+  {cat:'CSS', q:'sticky จะติดกับ?', o:['viewport เสมอ','บรรพบุรุษที่เลื่อน scroll ได้','<html>','<body>'], a:1},
+  {cat:'CSS', q:'z-index ใช้ได้เมื่อ…', o:['position ไม่ใช่ static','block เท่านั้น','flex เท่านั้น','อยู่บน body เท่านั้น'], a:0},
+  {cat:'CSS', q:'display:none กับ visibility:hidden ต่างกัน?', o:['none ซ่อนและกันพื้นที่','hidden ซ่อนและกันพื้นที่','none ซ่อนและไม่กันพื้นที่','ทั้งคู่กันพื้นที่'], a:2},
+  {cat:'CSS', q:':hover และ :focus เป็น…', o:['pseudo-element','pseudo-class','attribute selector','ไม่เกี่ยว'], a:1},
+  {cat:'CSS', q:'เลือกแถวที่ 2 ใช้?', o:[':nth-child(2)',':nth-of-type(2)',':first-child(2)',':row(2)'], a:0},
+  {cat:'CSS', q:'box-sizing:border-box ทำให้…', o:['width รวม padding/border','width ไม่รวม padding/border','ไม่เกี่ยวกับ width','ลบ margin อัตโนมัติ'], a:0},
+  {cat:'CSS', q:'ประกาศตัวแปร CSS แบบไหน?', o:['$brand','#brand','--brand','@brand'], a:2},
   {cat:'CSS', q:'ใช้ตัวแปร CSS อย่างไร?', o:['use(--brand)','var(--brand)','get(--brand)','value(--brand)'], a:1},
 ];
+const BANK = [...PROG, ...HTMLQ, ...CSSQ];
 
-const BANK = [...PROG, ...HTMLQ, ...CSSQ]; // 40 ข้อ
-
-/* ===== State & Config ===== */
-const TOTAL = 40;
-const POINT_PER = 2.5; // 40 * 2.5 = 100
-const MAX_SCORE = TOTAL * POINT_PER;
+/* ===== Config/State ===== */
+const TOTAL = 40, POINT_PER = 2.5, MAX_SCORE = TOTAL*POINT_PER;
 const CAT_TARGET = { Programming:10, HTML:15, CSS:15 };
-
 const screens = {home:$("home"), rules:$("rules"), quiz:$("quiz"), result:$("result")};
 const els = {
   btnPlay:$("btnPlay"), btnRules:$("btnRules"), btnStart:$("btnStart"), btnCloseRules:$("btnCloseRules"),
   btnExit:$("btnExit"), btnSubmit:$("btnSubmit"), btnNext:$("btnNext"), btnRestart:$("btnRestart"),
   pillCat:$("pillCat"), pillNo:$("pillNo"), pillScore:$("pillScore"), prog:$("prog"),
   qtext:$("qtext"), qform:$("qform"), feedback:$("feedback"),
-  stat:$("stat"), scoreFinal:$("scoreFinal"), pctFinal:$("pctFinal"), timeFinal:$("timeFinal"),
-  gradeBadge:$("gradeBadge"), meter:$("meter"), avgGrade:$("avgGrade"), hints:$("hints"),
+  stat:$("stat"), scoreFinal:$("scoreFinal"), pctFinal:$("pctFinal"), timeTotal:$("timeTotal"),
+  gradeBadge:$("gradeBadge"), meter:$("meter"), perQWrap:$("perQWrap"),
+  finalHint:$("finalHint"), revealBlock:$("revealBlock"), sparkle:$("sparkle")
+};
+let state = {
+  order:[], i:0, score:0, selected:null, answered:false,
+  startTime:0, perCat:{Programming:0, HTML:0, CSS:0},
+  qStart:0, perQ:[] // {no, cat, sec}
 };
 
-let state = { order:[], i:0, score:0, selected:null, answered:false, startTime:0, perCat:{Programming:0, HTML:0, CSS:0} };
-
-/* ===== Fun messages (เกรียน ๆ) ===== */
-const MSG_OK = [
-  "ใกล้แล้วนะ เก่งจังเลย 🤟",
-  "คมจัด! สมองไวเว่อร์ ✨",
-  "ถูกต้องครับท่านโปร! 🧠",
-  "สุดยอด…ท่าไม้ตายใช้ได้อยู่ 🔥",
-  "อย่างเท่! อีกนิดคือระดับเซียน 😎",
-  "น้องนี่ไม่ธรรมดาเลยนะ 👏",
-  "ตอบได้ไงเนี่ย เกินไปแล้ว 🤯",
+/* ===== Fun lines (no-repeat bags) ===== */
+function makeBag(src){ let bag=[]; return ()=>{ if(!bag.length) bag=shuffle(src.slice()); return bag.pop(); } }
+const LINES_OK = [
+  "เอ้า! เฉียบเวอร์ ใครสอนมาเนี่ย 🔥","โหดชะมัด ใกล้จะแซงรุ่นพี่แล้วนะ 😎",
+  "ถูกแบบไม่เผื่อคู่แข่ง เกินไปมั้ย! 💥","สมองไวแบบ SSD NVMe! ✨",
+  "โคตรคม ช็อตนี้คะแนนพุ่ง! 🚀","เทพจัด ครูยังต้องขอเฉลย 🤯",
+  "ของจริงไม่พูดเยอะ ยิงเข้าเป้า! 🎯","เนียนกริบ เหมือนไม่ได้พยายาม 😌",
+  "คำนวณไวกว่าเครื่องคิดเลขอีกมั้ง 🧠","ตอบปุ๊บเข้าปั๊บ โปรของจริง! 💪",
 ];
-const MSG_ERR = [
-  "อุ๊ย ผิดอีกแล้วหรอ 😂",
-  "เกือบละๆ แต่ยังไม่ใช่นะจ๊ะ 😉",
-  "ตอบอะไรคะเนี่ย 😏 ลองคิดใหม่",
-  "อีกนิดเดียว ใจเย็นก่อนนะ 🤏",
-  "ครั้งนี้พลาด แต่ไม่เป็นไร ลุยต่อ!",
-  "เอ้าาาา หลุดโค้งไปเฉย 🤡",
+const LINES_ERR = [
+  "อุ๊ย… พลาดอีกแล้วหรอ คิดใหม่ดี ๆ 😏","คำตอบเมื่อกี้คืออะไรลูกเอ๊ย 😂",
+  "เกือบถูกละ แต่ชิ่งออกโค้งไปเฉย 🤡","ใจเย็นก่อน นี่มันไม่ใช่กาชา ดวงช่วยไม่ได้ 😜",
+  "พลาดท่าแล้วไงล่ะ กลับมาแก้เกม! 💢","ถามโค้ด ไม่ได้ถามดวงนะจ๊ะ 😉",
+  "พลาดนิดเดียว แต่เดี๋ยวก็ได้ เชื่อดิ 👀","สมาธิหลุดใช่ไหม กลับเข้าลู่! 🫡",
+  "โอเค รอบนี้ถือว่าอุ่นเครื่อง 🔧","ฮึบ! อีกทีนะ คนเก่งสู้ต่อ ✊",
 ];
+const nextOK = makeBag(LINES_OK);
+const nextERR = makeBag(LINES_ERR);
 
-/* ===== Basic helpers ===== */
-function show(name){ for(const k in screens) screens[k].hidden = (k!==name); }
-function gradeFromPct(p){
-  if(p>=90) return 'A';
-  if(p>=80) return 'B';
-  if(p>=70) return 'C';
-  if(p>=60) return 'D';
-  return 'F';
+/* ===== Confetti & Sparkles ===== */
+const confettiCanvas = document.getElementById('confetti');
+const cctx = confettiCanvas.getContext('2d');
+function resizeConfetti(){ confettiCanvas.width=innerWidth; confettiCanvas.height=innerHeight; }
+addEventListener('resize', resizeConfetti); resizeConfetti();
+let confettiRaf=null;
+function burstConfetti({count=120,y=0.3}={}){
+  const W=confettiCanvas.width,H=confettiCanvas.height;
+  const particles=[]; confettiCanvas.style.display='block';
+  for(let i=0;i<count;i++){
+    particles.push({x:W/2+(Math.random()-.5)*W*.4,y:H*y+(Math.random()-.5)*H*.05,
+      vx:(Math.random()-.5)*6,vy:Math.random()*-6-3,g:.12+Math.random()*.08,s:6+Math.random()*6,r:Math.random()*Math.PI,cr:Math.random()*360});
+  }
+  const start=performance.now();
+  (function draw(){
+    cctx.clearRect(0,0,W,H);
+    particles.forEach(p=>{p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.r+=.1;p.cr+=6;
+      const col=`hsl(${p.cr%360},90%,${50+20*Math.sin(p.r)}%)`;
+      cctx.save();cctx.translate(p.x,p.y);cctx.rotate(p.r);cctx.fillStyle=col;cctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);cctx.restore();
+    });
+    if(performance.now()-start<1200){confettiRaf=requestAnimationFrame(draw);}
+    else{confettiCanvas.style.display='none';cctx.clearRect(0,0,W,H);cancelAnimationFrame(confettiRaf);}
+  })();
+}
+function spawnSparkles(container, n=30){
+  container.innerHTML=''; const r=container.getBoundingClientRect();
+  for(let i=0;i<n;i++){ const dot=document.createElement('i');
+    dot.style.left=`${Math.random()*r.width}px`; dot.style.top=`${Math.random()*r.height}px`;
+    dot.style.animationDuration=`${1+Math.random()*1.2}s`; container.appendChild(dot); }
 }
 
 /* ===== Flow ===== */
-$("btnPlay").addEventListener('click', ()=>show('rules'));
-$("btnRules").addEventListener('click', ()=>show('rules'));
-$("btnCloseRules").addEventListener('click', ()=>show('home'));
-$("btnStart").addEventListener('click', startQuiz);
-$("btnExit").addEventListener('click', ()=>{
-  if(confirm('ออกจากแบบทดสอบและกลับหน้าแรก? ความคืบหน้าจะหายไป')) restart();
-});
-$("btnSubmit").addEventListener('click', submitAnswer);
-$("btnNext").addEventListener('click', nextQuestion);
-$("btnRestart").addEventListener('click', restart);
-
-// Enter เพื่อส่งคำตอบอย่างรวดเร็ว (ถ้าเลือกแล้ว)
-document.addEventListener('keydown',(e)=>{
+function show(name){ for(const k in screens) screens[k].hidden=(k!==name); }
+$("btnPlay").addEventListener('click',()=>show('rules'));
+$("btnRules").addEventListener('click',()=>show('rules'));
+$("btnCloseRules").addEventListener('click',()=>show('home'));
+$("btnStart").addEventListener('click',startQuiz);
+$("btnExit").addEventListener('click',()=>{ if(confirm('ออกจากแบบทดสอบและกลับหน้าแรก? ความคืบหน้าจะหายไป')) restart(); });
+$("btnSubmit").addEventListener('click',submitAnswer);
+$("btnNext").addEventListener('click',nextQuestion);
+$("btnRestart").addEventListener('click',restart);
+addEventListener('keydown',e=>{
   if(!screens.quiz.hidden && e.key==='Enter'){
-    const tag = document.activeElement?.tagName?.toLowerCase();
+    const tag=document.activeElement?.tagName?.toLowerCase();
     if(tag!=='button' && tag!=='input' && !$("btnSubmit").disabled) submitAnswer(e);
   }
 });
 
+/* ===== Quiz ===== */
 function startQuiz(){
-  state.order = shuffle([...Array(BANK.length).keys()]); // สุ่มใหม่ทุกครั้ง
-  state.i=0; state.score=0; state.selected=null; state.answered=false; state.startTime=Date.now();
-  state.perCat = {Programming:0, HTML:0, CSS:0};
+  state.order = shuffle([...Array(BANK.length).keys()]);
+  state.i=0; state.score=0; state.selected=null; state.answered=false;
+  state.startTime=performance.now(); state.perCat={Programming:0,HTML:0,CSS:0}; state.perQ=[];
   renderQuestion(); show('quiz');
 }
-
 function renderQuestion(){
-  const qi = state.order[state.i], item = BANK[qi];
-  els.pillCat.textContent = `หมวด: ${item.cat}`;
-  els.pillNo.textContent  = `ข้อที่ ${state.i+1}/${TOTAL}`;
-  els.qtext.innerHTML     = escapeHtml(item.q);
-  els.qform.innerHTML = '';
+  const qi=state.order[state.i], item=BANK[qi];
+  els.pillCat.textContent=`หมวด: ${item.cat}`;
+  els.pillNo.textContent =`ข้อที่ ${state.i+1}/${TOTAL}`;
+  els.qtext.innerHTML    =escapeHtml(item.q);
+  els.qform.innerHTML='';
   item.o.forEach((opt,idx)=>{
     const id=`opt-${state.i}-${idx}`;
     const label=document.createElement('label'); label.className='choice'; label.setAttribute('for',id);
     const input=document.createElement('input'); input.type='radio'; input.name='choice'; input.id=id; input.value=idx;
     input.addEventListener('change',()=>{ state.selected=idx; els.btnSubmit.disabled=false; });
-    const span=document.createElement('span'); span.innerHTML = `<span class="mono">(${String.fromCharCode(65+idx)})</span> ${escapeHtml(opt)}`;
-    label.appendChild(input); label.appendChild(span);
-    els.qform.appendChild(label);
+    const span=document.createElement('span'); span.innerHTML=`<span class="mono">(${String.fromCharCode(65+idx)})</span> ${escapeHtml(opt)}`;
+    label.appendChild(input); label.appendChild(span); els.qform.appendChild(label);
   });
   els.feedback.textContent=''; els.feedback.className='feedback';
   els.btnSubmit.disabled=true; els.btnNext.hidden=true;
-  els.pillScore.textContent = `คะแนน ${fmtScore(state.score)}/${MAX_SCORE}`;
-  els.prog.style.width = `${(state.i/TOTAL*100).toFixed(1)}%`;
+  els.pillScore.textContent=`คะแนน ${fmt1(state.score)}/${MAX_SCORE}`;
+  els.prog.style.width=`${(state.i/TOTAL*100).toFixed(1)}%`;
+  state.qStart = performance.now();
 }
-
 function submitAnswer(e){
-  e.preventDefault();
-  if(state.selected===null || state.answered) return;
-  const qi = state.order[state.i], item = BANK[qi];
-  const correct = (state.selected===item.a);
-  state.answered = true;
+  e.preventDefault(); if(state.selected===null || state.answered) return;
+  const qi=state.order[state.i], item=BANK[qi]; const correct=(state.selected===item.a);
+  state.answered=true;
+  const dt = (performance.now()-state.qStart)/1000; // วินาที
+  state.perQ.push({ no: state.i+1, cat: item.cat, sec: dt });
 
-  if(correct){
-    state.score += POINT_PER;
-    state.perCat[item.cat] += 1;
-    els.feedback.textContent = MSG_OK[Math.floor(Math.random()*MSG_OK.length)];
-    els.feedback.className = 'feedback ok';
-  }else{
-    els.feedback.textContent = MSG_ERR[Math.floor(Math.random()*MSG_ERR.length)];
-    els.feedback.className = 'feedback err';
-  }
+  if(correct){ state.score+=POINT_PER; state.perCat[item.cat]+=1; els.feedback.textContent=nextOK(); els.feedback.className='feedback ok'; burstConfetti({count:90,y:0.18}); }
+  else{ els.feedback.textContent=nextERR(); els.feedback.className='feedback err'; }
 
-  // ล็อคและไฮไลต์
   els.qform.querySelectorAll('input[type="radio"]').forEach((inp,idx)=>{
-    inp.disabled=true;
-    const box=inp.closest('.choice');
-    if(idx===item.a) box.style.borderColor='rgba(112,255,160,.75)';
-    if(idx===state.selected && !correct) box.style.borderColor='rgba(255,95,114,.8)';
+    inp.disabled=true; const box=inp.closest('.choice');
+    if(idx===item.a) box.style.borderColor='rgba(112,255,160,.85)';
+    if(idx===state.selected && !correct) box.style.borderColor='rgba(255,95,114,.95)';
   });
-
   els.btnSubmit.disabled=true; els.btnNext.hidden=false;
-  els.pillScore.textContent = `คะแนน ${fmtScore(state.score)}/${MAX_SCORE}`;
+  els.pillScore.textContent=`คะแนน ${fmt1(state.score)}/${MAX_SCORE}`;
 }
+function nextQuestion(){ if(!state.answered) return; state.i++; if(state.i>=TOTAL) showResult(); else{ state.selected=null; state.answered=false; renderQuestion(); } }
 
-function nextQuestion(){
-  if(!state.answered) return;
-  state.i++;
-  if(state.i>=TOTAL){ showResult(); }
-  else{ state.selected=null; state.answered=false; renderQuestion(); }
-}
-
+/* ===== Result ===== */
+function gradeFromPct(p){ if(p>=90) return 'A'; if(p>=80) return 'B'; if(p>=70) return 'C'; if(p>=60) return 'D'; return 'F'; }
 function showResult(){
-  const elapsed = Math.round((Date.now()-state.startTime)/1000);
-  const pct = Math.round(state.score / MAX_SCORE * 100);
+  const elapsed = (performance.now()-state.startTime)/1000;
+  const pct = Math.round(state.score/MAX_SCORE*100);
   const grade = gradeFromPct(pct);
 
-  // header stats
-  $("stat").textContent = `ทำครบ ${TOTAL} ข้อแล้ว`;
-  els.scoreFinal.textContent = fmtScore(state.score);
-  els.pctFinal.textContent = pct.toString();
-  els.timeFinal.textContent = elapsed.toString();
-  els.gradeBadge.textContent = `${grade} (${pct}%)`;
+  els.stat.textContent=`ทำครบ ${TOTAL} ข้อแล้ว`;
+  els.scoreFinal.textContent=fmt1(state.score);
+  els.pctFinal.textContent=pct.toString();
+  els.timeTotal.textContent=fmt1(elapsed);
+  els.gradeBadge.textContent=`${grade} (${pct}%)`;
 
-  // meter per category + hints
-  els.meter.innerHTML = '';
-  els.hints.innerHTML = '';
-  const cats = ['Programming','HTML','CSS'];
-  const tips = {
-    Programming: [
-      "ทบทวน Big-O และโครงสร้างข้อมูลพื้นฐาน (array, stack, queue, hash)",
-      "ฝึกคิดลำดับขั้นตอน (algorithmic thinking) จากปัญหาสั้นๆ"
-    ],
-    HTML: [
-      "โฟกัส semantic tags, ฟอร์ม, และการเข้าถึง (ARIA)",
-      "ฝึก defer/async, meta viewport และโครงสร้างตาราง"
-    ],
-    CSS: [
-      "ทบทวน specificity, Flex/Grid และ box-model ให้แม่น",
-      "ลองทำเลย์เอาต์ responsive ด้วย media query"
-    ]
-  };
-
-  cats.forEach(cat=>{
-    const correct = state.perCat[cat];
-    const total   = CAT_TARGET[cat];
+  // ด้านไหนเก่ง
+  els.meter.innerHTML='';
+  ['Programming','HTML','CSS'].forEach(cat=>{
+    const correct = state.perCat[cat], total = CAT_TARGET[cat];
     const p = Math.round((correct/total)*100);
-    const row = document.createElement('div');
-    row.className = 'rowb';
-    row.innerHTML = `
-      <div class="mono">${cat}</div>
+    const row=document.createElement('div'); row.className='rowb';
+    row.innerHTML=`<div class="mono">${cat}</div>
       <div class="track"><div class="fill" style="width:${p}%;"></div></div>
-      <div class="mono" style="text-align:right">${p}%</div>
-    `;
+      <div class="mono" style="text-align:right">${p}%</div>`;
     els.meter.appendChild(row);
-
-    if(p<80){ // ใส่คำใบ้เฉพาะหมวดที่ยังไม่แข็ง
-      tips[cat].forEach(t=>{
-        const li=document.createElement('li');
-        li.textContent = `• ${cat}: ${t}`;
-        els.hints.appendChild(li);
-      });
-    }
   });
 
-  // เกรดเฉลี่ย (เปอร์เซ็นต์รวม) → แปลงเป็นตัวอักษรอีกรอบเพื่อสวยงาม
-  const avgLetter = gradeFromPct(pct);
-  els.avgGrade.textContent = `${avgLetter} (${pct}%)`;
+  // เวลาแต่ละข้อ
+  els.perQWrap.innerHTML = perQTable(state.perQ);
 
-  // แถบความคืบหน้าให้เต็ม
-  els.prog.style.width = '100%';
+  // คำใบ้ (คงไว้ตามที่กำหนด)
+  els.finalHint.textContent =
+`( Change 53 41 59 53 41 4D 4F 4E 45 to letters and change IECI ICHD to numbers )
+//class:2CW2`;
 
+  // เผยตัวตนตามสัญญาเมื่อ ≥ B
+  els.revealBlock.style.display = (grade==='A' || grade==='B') ? 'block' : 'none';
+
+  // เอฟเฟกต์
+  burstConfetti({count:180,y:0.25});
+  spawnSparkles(els.sparkle, 34);
+
+  els.prog.style.width='100%';
   show('result');
 }
-
+function perQTable(items){
+  let rows = `<table aria-label="เวลาแต่ละข้อ"><thead><tr><th>ข้อ</th><th>หมวด</th><th>เวลา (วินาที)</th></tr></thead><tbody>`;
+  items.forEach(it=>{ rows += `<tr><td>${it.no}</td><td>${it.cat}</td><td>${fmt1(it.sec)}</td></tr>`; });
+  rows += `</tbody></table>`;
+  return rows;
+}
 function restart(){ show('home'); }
+})(); // end IIFE
 </script>
 </body>
 </html>
